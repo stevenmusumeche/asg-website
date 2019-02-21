@@ -2,7 +2,7 @@
   "compilerOptions": {
     "lib": ["es2017"],
     "moduleResolution": "node",
-    "noUnusedLocals": true,
+    "noUnusedLocals": false,
     "noUnusedParameters": false,
     "sourceMap": true,
     "target": "es2017",

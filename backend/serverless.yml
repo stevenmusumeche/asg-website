@@ -1,11 +1,15 @@
 service:
   name: backend
 
-# Add the serverless-webpack plugin
 plugins:
   - serverless-dotenv-plugin
   - serverless-webpack
+  - serverless-api-gateway-caching
   - serverless-offline
+
+custom:
+  apiGatewayCaching:
+    enabled: true
 
 provider:
   name: aws
@@ -21,3 +25,6 @@ functions:
           path: events/upcoming
           method: get
           cors: true
+          caching:
+            enabled: true
+            ttlInSeconds: 900 # 15 mins

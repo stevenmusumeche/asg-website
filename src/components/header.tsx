@@ -1,17 +1,19 @@
 import { Link } from "gatsby";
 import React from "react";
+import styled from "styled-components";
+import { primaryColor } from "../styles/colors";
 
 interface IHeaderProps {
   siteTitle: string;
 }
 
+const StyledHeader = styled.header`
+  background: ${primaryColor};
+  margin-bottom: 1.45rem;
+`;
+
 const Header = ({ siteTitle = "" }: IHeaderProps) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
+  <StyledHeader>
     <div
       style={{
         margin: `0 auto`,
@@ -31,7 +33,7 @@ const Header = ({ siteTitle = "" }: IHeaderProps) => (
         </Link>
       </h1>
     </div>
-  </header>
+  </StyledHeader>
 );
 
 export default Header;

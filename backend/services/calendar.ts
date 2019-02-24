@@ -9,8 +9,6 @@ import {
   MeetupEvent,
 } from "../types/events";
 
-// todo: cache results: https://www.npmjs.com/package/serverless-api-gateway-caching
-
 /**
  * Places where we get events from
  */
@@ -18,8 +16,8 @@ const eventSources: EventSource[] = [
   {
     name: "Acadiana Software Group Calendar",
     fetcher: fetchFromGoogleCalendar(
-      process.env.GOOGLE_CALENDAR_ID,
-      process.env.GOOGLE_CALENDAR_API_KEY
+      process.env.GOOGLE_CALENDAR_ID as string,
+      process.env.GOOGLE_CALENDAR_API_KEY as string
     ),
   },
   {
@@ -48,7 +46,7 @@ export async function listEvents(): Promise<Event[]> {
     .sort(sortByStartDate);
 }
 
-function fetchFromMeetup(meetupUrlName) {
+function fetchFromMeetup(meetupUrlName: string) {
   return async function fetcher(source: string) {
     const url = `https://api.meetup.com/${meetupUrlName}/events?photo-host=public&page=200&key=${
       process.env.MEETUP_API_KEY

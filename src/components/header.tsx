@@ -5,10 +5,6 @@ import { Asg } from "../components/asg";
 import { Nav } from "../components/nav";
 import { HeaderContainer as Container } from "../styles/alignment";
 
-interface IHeaderProps {
-  headerTitle: string;
-}
-
 const StyledHeader = styled.header`
   background: ${primaryColor};
   margin-bottom: 1.45rem;
@@ -16,12 +12,11 @@ const StyledHeader = styled.header`
 
 /**
  * Top header
- * @param props requires headerTitle
  */
-const Header = ({ headerTitle = "" }: IHeaderProps) => (
+const Header = () => (
   <StyledHeader>
     <Container>
-      <Asg headerTitle={headerTitle} />
+      <Asg />
       <Nav />
     </Container>
   </StyledHeader>

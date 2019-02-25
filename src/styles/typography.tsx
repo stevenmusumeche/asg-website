@@ -5,7 +5,6 @@
 import Typography, { TypographyOptions } from "typography";
 import React from "react";
 import styled from "styled-components";
-import { Link as gatsbyLink } from "gatsby";
 
 import { stripes } from "../styles/colors";
 
@@ -32,22 +31,16 @@ const typography = new Typography(config);
 export default typography;
 
 /**
- * Custom typography
+ * Three-color striped text.  Used in header acronym
  */
-export const HeaderAcronym = styled.h1`
+export const StripedHeader = styled.h1`
   letter-spacing: 0.05em;
   margin: 0 0 0 0.1em;
   text-shadow: -0.05em 0 0 ${stripes.yellow}, -0.1em 0 0 ${stripes.red};
   text-transform: uppercase;
 `;
 
-export const HeaderLink = styled(gatsbyLink)`
-  color: ${stripes.white};
-  text-decoration: none;
-`;
-
 /**
- * SectionHeader
  * Sets the text to uppercase and sets the id for anchor links
  */
 export const SectionHeader = ({ children }: { children: string }) => (
@@ -56,12 +49,13 @@ export const SectionHeader = ({ children }: { children: string }) => (
   </h1>
 );
 
-export const NavContainer = styled.div`
-  a {
-    color: ${stripes.white};
-    font-family: ${config.headerFontFamily.join(`,`)};
-    margin-left: 1em;
-    text-decoration: none;
-    text-transform: uppercase;
-  }
+/**
+ * Links for navigation
+ */
+export const NavLink = styled.a`
+  color: ${stripes.white};
+  font-family: ${config.headerFontFamily.join(`,`)};
+  margin-left: 1em;
+  text-decoration: none;
+  text-transform: uppercase;
 `;

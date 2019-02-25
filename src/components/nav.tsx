@@ -1,11 +1,14 @@
 import React from "react";
 
-import { NavContainer } from "../styles/typography";
+import { NavLink } from "../styles/typography";
 
+/**
+ * List of nav links in the header
+ */
 export const Nav = () => (
-  <NavContainer>
+  <div>
     {["events", "jobs", "about", "join"].map(x => (
-      <a href={`#${x}`}>{x}</a>
+      <NavLink href={`#${x}`}>{x}</NavLink>
     ))}
-  </NavContainer>
+  </div>
 );

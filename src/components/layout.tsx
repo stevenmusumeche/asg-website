@@ -3,7 +3,8 @@ import { StaticQuery, graphql } from "gatsby";
 import { TypographyStyle, GoogleFont } from "react-typography";
 
 import Header from "./header";
-import typography from "../styles/typography-config";
+import typography from "../styles/typography";
+import { Container } from "../styles/alignment";
 
 interface ILayoutProps {
   children: JSX.Element[];
@@ -15,7 +16,7 @@ const Layout = ({ children }: ILayoutProps) => (
       query SiteTitleQuery {
         site {
           siteMetadata {
-            title
+            acronym
           }
         }
       }
@@ -24,18 +25,11 @@ const Layout = ({ children }: ILayoutProps) => (
       <>
         <TypographyStyle typography={typography} />
         <GoogleFont typography={typography} />
-        <Header siteTitle={data.site.siteMetadata.title} />
-        <div
-          style={{
-            margin: `0 auto`,
-            maxWidth: 960,
-            padding: `0px 1.0875rem 1.45rem`,
-            paddingTop: 0,
-          }}
-        >
+        <Header headerTitle={data.site.siteMetadata.acronym} />
+        <Container>
           <main>{children}</main>
           <footer />
-        </div>
+        </Container>
       </>
     )}
   />

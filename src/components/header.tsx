@@ -2,9 +2,10 @@ import { Link } from "gatsby";
 import React from "react";
 import styled from "styled-components";
 import { primaryColor } from "../styles/colors";
+import { StripedHeaderText } from "../styles/typography";
 
 interface IHeaderProps {
-  siteTitle: string;
+  headerTitle: string;
 }
 
 const StyledHeader = styled.header`
@@ -12,7 +13,7 @@ const StyledHeader = styled.header`
   margin-bottom: 1.45rem;
 `;
 
-const Header = ({ siteTitle = "" }: IHeaderProps) => (
+const Header = ({ headerTitle = "" }: IHeaderProps) => (
   <StyledHeader>
     <div
       style={{
@@ -21,7 +22,7 @@ const Header = ({ siteTitle = "" }: IHeaderProps) => (
         padding: `1.45rem 1.0875rem`,
       }}
     >
-      <h1 style={{ margin: 0 }}>
+      <StripedHeaderText style={{ margin: 0 }}>
         <Link
           to="/"
           style={{
@@ -29,9 +30,9 @@ const Header = ({ siteTitle = "" }: IHeaderProps) => (
             textDecoration: `none`,
           }}
         >
-          {siteTitle}
+          {headerTitle}
         </Link>
-      </h1>
+      </StripedHeaderText>
     </div>
   </StyledHeader>
 );

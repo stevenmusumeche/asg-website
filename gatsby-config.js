@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `Acadiana Software Group`,
+    acronym: `ASG`,
     description: `a local group of software enthusiasts`,
   },
   plugins: [
@@ -22,7 +23,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-typography`,
       options: {
-        pathToConfigModule: `src/styles/typography-config`,
+        pathToConfigModule: `src/styles/typography`,
       },
     },
     `gatsby-plugin-typescript`,

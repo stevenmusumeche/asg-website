@@ -1,8 +1,11 @@
 import React from "react";
-import { Link } from "gatsby";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
+import { About } from "../sections/about";
+import { Events } from "../sections/events";
+import { Jobs } from "../sections/jobs";
+import { Join } from "../sections/join";
 
 const IndexPage = () => (
   <Layout>
@@ -18,9 +21,10 @@ const IndexPage = () => (
         `acadiana software group`,
       ]}
     />
-    <h1>Hi people</h1>
-    <p>Welcome to your new Gatsby site.</p>
-    <Link to="/events/">Events</Link>
+    <About />
+    <Events />
+    <Jobs />
+    <Join />
   </Layout>
 );
 

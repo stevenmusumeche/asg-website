@@ -1,4 +1,4 @@
-export interface Event {
+interface Event {
   id: string;
   name: string;
   location: string;
@@ -9,7 +9,7 @@ export interface Event {
   description?: string;
 }
 
-export interface GoogleCalendarItem {
+interface GoogleCalendarItem {
   kind: "calendar#event";
   id: string;
   status: string;
@@ -32,18 +32,18 @@ export interface GoogleCalendarItem {
   guestsCanSeeOtherGuests: boolean;
 }
 
-export interface GoogleCalendarItems {
+interface GoogleCalendarItems {
   items: GoogleCalendarItem[];
 }
 
-export type EventFetcher = (name: string) => Promise<Event[]>;
+type EventFetcher = (name: string) => Promise<Event[]>;
 
-export interface EventSource {
+interface EventSource {
   name: string;
   fetcher: EventFetcher;
 }
 
-export interface MeetupEvent {
+interface MeetupEvent {
   id: string;
   name: string;
   time: string;

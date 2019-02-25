@@ -1,13 +1,5 @@
 import axios from "axios";
 import * as h2p from "html2plaintext";
-import {
-  GoogleCalendarItems,
-  GoogleCalendarItem,
-  Event,
-  EventSource,
-  EventFetcher,
-  MeetupEvent,
-} from "../types/events";
 
 /**
  * Places where we get events from

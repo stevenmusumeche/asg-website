@@ -4,7 +4,7 @@ import { TypographyStyle, GoogleFont } from "react-typography";
 
 import Header from "./header";
 import typography from "../styles/typography";
-import { Container } from "../styles/alignment";
+import { Body } from "../styles/alignment";
 
 interface ILayoutProps {
   children: JSX.Element[];
@@ -26,10 +26,10 @@ const Layout = ({ children }: ILayoutProps) => (
         <TypographyStyle typography={typography} />
         <GoogleFont typography={typography} />
         <Header headerTitle={data.site.siteMetadata.acronym} />
-        <Container>
+        <Body>
           <main>{children}</main>
           <footer />
-        </Container>
+        </Body>
       </>
     )}
   />

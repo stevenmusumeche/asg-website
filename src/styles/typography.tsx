@@ -3,7 +3,9 @@
  * NOTE: Default export is used for Typography.js
  */
 import Typography, { TypographyOptions } from "typography";
+import React from "react";
 import styled from "styled-components";
+import { Link as gatsbyLink } from "gatsby";
 
 import { stripes } from "../styles/colors";
 
@@ -32,14 +34,34 @@ export default typography;
 /**
  * Custom typography
  */
-export const StripedHeaderText = styled.h1`
-  color: ${stripes.one}
+export const HeaderAcronym = styled.h1`
   letter-spacing: 0.05em;
-  margin-left: 0.1em;
-  text-shadow: -0.05em 0 0 ${stripes.two}, -0.1em 0 0 ${stripes.three};
+  margin: 0 0 0 0.1em;
+  text-shadow: -0.05em 0 0 ${stripes.yellow}, -0.1em 0 0 ${stripes.red};
   text-transform: uppercase;
 `;
 
-export const SectionHeader = styled.h1`
-  text-transform: uppercase;
+export const HeaderLink = styled(gatsbyLink)`
+  color: ${stripes.white};
+  text-decoration: none;
+`;
+
+/**
+ * SectionHeader
+ * Sets the text to uppercase and sets the id for anchor links
+ */
+export const SectionHeader = ({ children }: { children: string }) => (
+  <h1 id={children.toLowerCase()} style={{ textTransform: "uppercase" }}>
+    {children}
+  </h1>
+);
+
+export const NavContainer = styled.div`
+  a {
+    color: ${stripes.white};
+    font-family: ${config.headerFontFamily.join(`,`)};
+    margin-left: 1em;
+    text-decoration: none;
+    text-transform: uppercase;
+  }
 `;

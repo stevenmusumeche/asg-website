@@ -6,9 +6,9 @@ export const acadianaFlag = {
 };
 
 export const stripes = {
-  one: "#fff",
-  two: acadianaFlag.yellow,
-  three: acadianaFlag.red
+  white: "#fff",
+  yellow: acadianaFlag.yellow,
+  red: acadianaFlag.red
 }
 
 export const primaryColor = acadianaFlag.blue;

@@ -2,9 +2,9 @@ import React from "react";
 
 import Layout from "../components/layout";
 import SEO from "../components/seo";
+import { Banner } from "../sections/banner";
 import { About } from "../sections/about";
 import { Events } from "../sections/events";
-import { Jobs } from "../sections/jobs";
 import { Join } from "../sections/join";
 
 const IndexPage = () => (
@@ -21,9 +21,9 @@ const IndexPage = () => (
         `acadiana software group`,
       ]}
     />
+    <Banner />
     <About />
     <Events />
-    <Jobs />
     <Join />
   </Layout>
 );

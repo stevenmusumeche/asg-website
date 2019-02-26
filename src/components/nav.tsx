@@ -7,8 +7,8 @@ import { NavLink } from "../styles/typography";
  */
 export const Nav = () => (
   <div>
-    {["events", "jobs", "about", "join"].map(x => (
-      <NavLink href={`#${x}`}>{x}</NavLink>
+    {["events", "about", "join"].map(x => (
+      <NavLink key={x} to={`#${x}`}>{x}</NavLink>
     ))}
   </div>
 );

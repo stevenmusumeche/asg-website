@@ -1,11 +1,19 @@
 import React from "react";
-import { Link, StaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
-import { StripedHeader } from "../styles/typography";
 
-const AsgLink = styled(Link)`
+import { Link, textStriper } from "../styles/typography";
+import { stripes } from "../styles/colors";
+
+const AsgText = styled.h1`
   color: white;
   text-decoration: none;
+  letter-spacing: 0.05em;
+  margin: 0 0 0 0.1em;
+  text-shadow: ${textStriper({
+    colorArray: [stripes.yellow, stripes.red],
+    step: 0.05,
+  })};
+  text-transform: uppercase;
 `;
 
 /**
@@ -13,20 +21,7 @@ const AsgLink = styled(Link)`
  * @param props requires headerTitle
  */
 export const Asg = () => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            acronym
-          }
-        }
-      }
-    `}
-    render={data => (
-      <StripedHeader>
-        <AsgLink to="/">{data.site.siteMetadata.acronym}</AsgLink>
-      </StripedHeader>
-    )}
-  />
+  <Link to="/">
+    <AsgText>ASG</AsgText>
+  </Link>
 );

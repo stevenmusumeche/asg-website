@@ -74,7 +74,13 @@ function SEO({
                   : []
               )
               .concat(meta)}
-          />
+          >
+            <link
+              rel="stylesheet"
+              type="text/css"
+              href="https://use.typekit.net/pex4ebf.css"
+            />
+          </Helmet>
         );
       }}
     />

@@ -6,56 +6,64 @@ import Typography, { TypographyOptions } from "typography";
 import React from "react";
 import styled from "styled-components";
 
-import { stripes } from "../styles/colors";
+import GatsbyLink from "gatsby-link";
 
 /**
- * Automatically fetches Google Fonts and sets major font families for our design.
+ * Sets major font families for our design.
  * For a full list of options see: https://kyleamathews.github.io/typography.js/
  */
 const config: TypographyOptions = {
-  googleFonts: [
-    {
-      name: "Futura",
-      styles: ["400"],
-    },
-    {
-      name: "Lobster",
-      styles: ["400"],
-    },
-  ],
-  headerFontFamily: ["Futura", "sans-serif"],
-  headerWeight: "normal",
-  bodyFontFamily: ["Lobster"],
+  headerFontFamily: ["itc-avant-garde-gothic-pro", "sans-serif"],
+  headerWeight: "400",
+  bodyFontFamily: ["sofia-pro", "sans-serif"],
 };
 const typography = new Typography(config);
 export default typography;
 
 /**
- * Three-color striped text.  Used in header acronym
- */
-export const StripedHeader = styled.h1`
-  letter-spacing: 0.05em;
-  margin: 0 0 0 0.1em;
-  text-shadow: -0.05em 0 0 ${stripes.yellow}, -0.1em 0 0 ${stripes.red};
-  text-transform: uppercase;
-`;
-
-/**
- * Sets the text to uppercase and sets the id for anchor links
+ * Sets the id for anchor links
  */
 export const SectionHeader = ({ children }: { children: string }) => (
-  <h1 id={children.toLowerCase()} style={{ textTransform: "uppercase" }}>
-    {children}
-  </h1>
+  <h1 id={children.toLowerCase()}>{children}</h1>
 );
+
+/**
+ * Links with no decoration
+ */
+export const Link = styled(GatsbyLink)`
+  text-decoration: none;
+`;
 
 /**
  * Links for navigation
  */
-export const NavLink = styled.a`
-  color: ${stripes.white};
+export const NavLink = styled(Link)`
+  color: white;
   font-family: ${config.headerFontFamily.join(`,`)};
-  margin-left: 1em;
+  letter-spacing: 0.15em;
+  margin-left: 2em;
   text-decoration: none;
   text-transform: uppercase;
 `;
+
+/**
+ * Generates stripes for text using text-shadow
+ * @param param0 
+ */
+export const textStriper = ({
+  colorArray,
+  step,
+  diagonal = true,
+}: {
+  colorArray: string[];
+  step: number;
+  diagonal?: boolean;
+}) =>
+  colorArray
+    .map(
+      (color, index) =>
+        `-${(index + 1) * step}em ${
+          diagonal ? `${(index + 1) * step}em` : 0
+        } 0 ${color}`
+    )
+    .join(", ");

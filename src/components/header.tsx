@@ -1,13 +1,23 @@
 import React from "react";
 import styled from "styled-components";
+
 import { primaryColor } from "../styles/colors";
 import { Asg } from "../components/asg";
 import { Nav } from "../components/nav";
-import { HeaderContainer as Container } from "../styles/alignment";
+import { Container } from "../styles/alignment";
 
 const StyledHeader = styled.header`
   background: ${primaryColor};
-  margin-bottom: 1.45rem;
+`;
+
+/**
+ * Sets max width, centering, and alignment for header. Extends Container
+ */
+export const HeaderContainer = styled(Container)`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
 `;
 
 /**
@@ -15,10 +25,10 @@ const StyledHeader = styled.header`
  */
 const Header = () => (
   <StyledHeader>
-    <Container>
+    <HeaderContainer>
       <Asg />
       <Nav />
-    </Container>
+    </HeaderContainer>
   </StyledHeader>
 );
 

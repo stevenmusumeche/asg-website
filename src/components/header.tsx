@@ -1,37 +1,35 @@
-import { Link } from "gatsby";
 import React from "react";
+import styled from "styled-components";
 
-interface IHeaderProps {
-  siteTitle: string;
-}
+import { primaryColor } from "../styles/colors";
+import { Asg } from "../components/asg";
+import { Nav } from "../components/nav";
+import { Container } from "../styles/alignment";
 
-const Header = ({ siteTitle = "" }: IHeaderProps) => (
-  <header
-    style={{
-      background: `rebeccapurple`,
-      marginBottom: `1.45rem`,
-    }}
-  >
-    <div
-      style={{
-        margin: `0 auto`,
-        maxWidth: 960,
-        padding: `1.45rem 1.0875rem`,
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: `white`,
-            textDecoration: `none`,
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </header>
+const StyledHeader = styled.header`
+  background: ${primaryColor};
+`;
+
+/**
+ * Sets max width, centering, and alignment for header. Extends Container
+ */
+export const HeaderContainer = styled(Container)`
+  align-items: center;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+`;
+
+/**
+ * Top header
+ */
+const Header = () => (
+  <StyledHeader>
+    <HeaderContainer>
+      <Asg />
+      <Nav />
+    </HeaderContainer>
+  </StyledHeader>
 );
 
 export default Header;

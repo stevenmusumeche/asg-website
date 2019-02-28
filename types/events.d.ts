@@ -1,4 +1,4 @@
-interface Event {
+interface ASGEvent {
   id: string;
   name: string;
   location: string;
@@ -36,9 +36,9 @@ interface GoogleCalendarItems {
   items: GoogleCalendarItem[];
 }
 
-type EventFetcher = (name: string) => Promise<Event[]>;
+type EventFetcher = (name: string) => Promise<ASGEvent[]>;
 
-interface EventSource {
+interface ASGEventSource {
   name: string;
   fetcher: EventFetcher;
 }
@@ -71,3 +71,5 @@ interface MeetupEvent {
   link: string;
   description: string;
 }
+
+type SortDirection = "ASC" | "DESC";

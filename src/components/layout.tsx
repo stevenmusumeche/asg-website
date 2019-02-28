@@ -5,7 +5,7 @@ import Header from "./header";
 import typography from "../styles/typography";
 
 interface ILayoutProps {
-  children: JSX.Element[];
+  children: JSX.Element[] | JSX.Element;
 }
 
 /**

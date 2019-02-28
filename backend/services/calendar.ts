@@ -4,7 +4,7 @@ import * as h2p from "html2plaintext";
 /**
  * Places where we get events from
  */
-const eventSources: EventSource[] = [
+const eventSources: ASGEventSource[] = [
   {
     name: "Acadiana Software Group Calendar",
     fetcher: fetchFromGoogleCalendar(
@@ -21,7 +21,7 @@ const eventSources: EventSource[] = [
 /**
  * Get all events from all sources
  */
-export async function listEvents(): Promise<Event[]> {
+export async function listEvents(): Promise<ASGEvent[]> {
   // build an array of promises from all event sources
   const fetches = eventSources.map(source => {
     return source.fetcher(source.name);
@@ -49,14 +49,13 @@ function fetchFromMeetup(meetupUrlName: string) {
   };
 }
 
-function mapMeetupToEvent(event: MeetupEvent): Event {
+function mapMeetupToEvent(event: MeetupEvent): ASGEvent {
   return {
     id: event.id,
     name: event.name,
-    location: `${event.venue.address_1}${event.venue.address_2 &&
-      " " + event.venue.address_2}, ${event.venue.city}, ${event.venue.state} ${
-      event.venue.zip
-    }`,
+    location: `${event.venue.address_1}${(event.venue.address_2 &&
+      " " + event.venue.address_2) ||
+      ""}, ${event.venue.city}, ${event.venue.state} ${event.venue.zip}`,
     url: event.link,
     startDate: new Date(event.time),
     endDate: new Date(event.time + event.duration),
@@ -88,7 +87,7 @@ function fetchFromGoogleCalendar(
   };
 }
 
-function mapGoogleToEvent(event: GoogleCalendarItem): Event {
+function mapGoogleToEvent(event: GoogleCalendarItem): ASGEvent {
   return {
     id: event.id,
     name: event.summary,
@@ -100,7 +99,7 @@ function mapGoogleToEvent(event: GoogleCalendarItem): Event {
   };
 }
 
-function sortByStartDate(a: Event, b: Event) {
+function sortByStartDate(a: ASGEvent, b: ASGEvent) {
   if (a.startDate > b.startDate) return 1;
   if (a.startDate < b.startDate) return -1;
   return 0;

@@ -18,8 +18,8 @@ provider:
   stage: dev
 
 functions:
-  upcoming_events:
-    handler: handler.upcoming_events
+  upcomingEvents:
+    handler: handler.upcomingEvents
     events:
       - http:
           path: events/upcoming
@@ -28,3 +28,12 @@ functions:
           caching:
             enabled: true
             ttlInSeconds: 900 # 15 mins
+  joinSlack:
+    handler: handler.joinSlack
+    events:
+      - http:
+          path: slack
+          method: post
+          cors: true
+          caching:
+            enabled: false

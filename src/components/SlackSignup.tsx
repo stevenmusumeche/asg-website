@@ -30,16 +30,16 @@ const SlackSignup: React.FC<Props> = function() {
     setTimeout(() => {}, 2000);
 
     try {
-      // todo: use real API address
-      const result = await wretch("https://api.thecatapi.com/v1/votes")
-        .headers({ "x-api-key": "d60ce627-0b5c-4b82-bbf2-a19c72b235bd" })
+      const result = await wretch(
+        "https://wnephqc0h5.execute-api.us-east-1.amazonaws.com/prod/slack"
+      )
         .post({ email })
         .json();
 
       setSubmitting(false);
       setSubmitted(true);
     } catch (e) {
-      console.log("error", e);
+      console.log(e);
 
       setSubmitting(false);
       setError("Error joining");

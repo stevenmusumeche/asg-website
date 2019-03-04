@@ -4,7 +4,7 @@ import styled from "styled-components";
 
 interface Props {}
 
-const _emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
+const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
 const EmailInput = styled.input<{ hasError: boolean }>`
   border-color: ${props => (props.hasError ? "red" : "grey")};
@@ -24,7 +24,7 @@ const SlackSignup: React.FC<Props> = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!_validateEmail(email)) {
+    if (!validateEmail(email)) {
       setError("Invalid email address");
       return;
     }
@@ -71,11 +71,11 @@ const SlackSignup: React.FC<Props> = () => {
   );
 };
 
-const _validateEmail = (email: string): boolean => {
+const validateEmail = (email: string): boolean => {
   if (!email) return false;
   if (email.length > 254) return false;
 
-  const valid = _emailRegex.test(email);
+  const valid = emailRegex.test(email);
   if (!valid) return false;
 
   // Further checking of some things regex can't handle

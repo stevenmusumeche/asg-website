@@ -10,6 +10,7 @@ const BannerText = styled.h1`
   font-size: 5em;
   font-weight: 900;
   letter-spacing: 0.05em;
+  margin-bottom: 0;
   text-align: center;
   text-shadow: ${textStriper({
     colorArray: [stripes.yellow, stripes.red],

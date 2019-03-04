@@ -44,6 +44,10 @@ const StripeSvg = styled.svg(
 `
 );
 
+/**
+ * Generates stripes for MainStripe.
+ * @param: props. First color is used for background above stripes
+ */
 const makeStripe: React.FC<StripeProps> = ({ color, index }) => (
   <StripeSvg
     index={index}

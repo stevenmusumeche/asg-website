@@ -1,17 +1,17 @@
 import React from "react";
 import { TypographyStyle, GoogleFont } from "react-typography";
 
-import Header from "./header";
+import Header from "./Header";
 import typography from "../styles/typography";
 
-interface ILayoutProps {
+interface Props {
   children: JSX.Element[] | JSX.Element;
 }
 
 /**
  * Adds typography and header.  Sets width using Container
  */
-const Layout = ({ children }: ILayoutProps) => (
+const Layout: React.FC<Props> = ({ children }) => (
   <>
     <TypographyStyle typography={typography} />
     <GoogleFont typography={typography} />

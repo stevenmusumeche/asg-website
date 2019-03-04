@@ -1,9 +1,8 @@
 import React from "react";
-import PropTypes from "prop-types";
 import Helmet from "react-helmet";
 import { StaticQuery, graphql } from "gatsby";
 
-interface ISEOProps {
+interface Props {
   description?: string;
   lang?: string;
   meta?: any[];
@@ -11,13 +10,13 @@ interface ISEOProps {
   title: string;
 }
 
-function SEO({
+const SEO: React.FC<Props> = ({
   description,
   lang = `en`,
   meta = [],
   keywords = [],
   title,
-}: ISEOProps) {
+}) => {
   return (
     <StaticQuery
       query={detailsQuery}
@@ -85,9 +84,7 @@ function SEO({
       }}
     />
   );
-}
-
-export default SEO;
+};
 
 const detailsQuery = graphql`
   query DefaultSEOQuery {
@@ -99,3 +96,5 @@ const detailsQuery = graphql`
     }
   }
 `;
+
+export default SEO;

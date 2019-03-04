@@ -6,7 +6,11 @@ interface Props {}
 
 const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
-const SlackSignup: React.FC<Props> = function() {
+const EmailInput = styled.input<{ hasError: boolean }>`
+  border-color: ${props => (props.hasError ? "red" : "grey")};
+`;
+
+const SlackSignup: React.FC<Props> = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -67,13 +71,7 @@ const SlackSignup: React.FC<Props> = function() {
   );
 };
 
-export default SlackSignup;
-
-const EmailInput = styled.input<{ hasError: boolean }>`
-  border-color: ${props => (props.hasError ? "red" : "grey")};
-`;
-
-function validateEmail(email: string): boolean {
+const validateEmail = (email: string): boolean => {
   if (!email) return false;
   if (email.length > 254) return false;
 
@@ -88,4 +86,6 @@ function validateEmail(email: string): boolean {
   if (domainParts.some(part => part.length > 63)) return false;
 
   return true;
-}
+};
+
+export default SlackSignup;

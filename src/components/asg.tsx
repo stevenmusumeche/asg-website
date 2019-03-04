@@ -20,8 +20,10 @@ const AsgText = styled.h1`
  * Striped acronym header
  * @param props requires headerTitle
  */
-export const Asg = () => (
+const Asg: React.FC = () => (
   <Link to="/">
     <AsgText>ASG</AsgText>
   </Link>
 );
+
+export default Asg

@@ -6,7 +6,7 @@ interface Props {
   maxEvents?: number;
 }
 
-const UpcomingEvents: React.FC<Props> = function({ maxEvents }) {
+const UpcomingEvents: React.FC<Props> = ({ maxEvents }) => {
   const events = useEvents();
 
   if (events.length === 0) {
@@ -22,8 +22,6 @@ const UpcomingEvents: React.FC<Props> = function({ maxEvents }) {
     .slice(0, maxEvents);
   return <ul>{renderEvents(upcomingEvents)}</ul>;
 };
-
-export default UpcomingEvents;
 
 function renderEvents(events: ASGEvent[]) {
   return events.map(event => {
@@ -52,3 +50,5 @@ function renderEvents(events: ASGEvent[]) {
     );
   });
 }
+
+export default UpcomingEvents;

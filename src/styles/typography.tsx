@@ -39,7 +39,7 @@ export const Link = styled(GatsbyLink)`
  */
 export const NavLink = styled(Link)`
   color: white;
-  font-family: ${config.headerFontFamily.join(`,`)};
+  font-family: ${(config as any).headerFontFamily.join(`,`)};
   letter-spacing: 0.15em;
   margin-left: 2em;
   text-decoration: none;
@@ -48,7 +48,7 @@ export const NavLink = styled(Link)`
 
 /**
  * Generates stripes for text using text-shadow
- * @param param0 
+ * @param param0
  */
 export const textStriper = ({
   colorArray,

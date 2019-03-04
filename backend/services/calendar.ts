@@ -1,5 +1,16 @@
 import axios from "axios";
 import * as h2p from "html2plaintext";
+import { isAfter, subMinutes } from "date-fns";
+
+interface Cache {
+  createdAt?: Date;
+  data: ASGEvent[];
+}
+
+// simple in-memory cache
+const cache: Cache = {
+  data: [],
+};
 
 /**
  * Places where we get events from
@@ -22,6 +33,15 @@ const eventSources: ASGEventSource[] = [
  * Get all events from all sources
  */
 export async function listEvents(): Promise<ASGEvent[]> {
+  // check cache and return data from it if it's fresh
+  const fifteenMinsAgo = subMinutes(new Date(), 15);
+  if (cache.createdAt && isAfter(cache.createdAt, fifteenMinsAgo)) {
+    console.log("Upcoming events cache hit");
+    return cache.data;
+  }
+
+  console.log("Upcoming events cache miss");
+
   // build an array of promises from all event sources
   const fetches = eventSources.map(source => {
     return source.fetcher(source.name);
@@ -31,11 +51,17 @@ export async function listEvents(): Promise<ASGEvent[]> {
   const data = await Promise.all(fetches);
 
   // return a sorted, flattened array of events
-  return data
+  const events = data
     .reduce(function(acc, cur) {
       return acc.concat(cur);
     }, [])
     .sort(sortByStartDate);
+
+  // cache it
+  cache.createdAt = new Date();
+  cache.data = events;
+
+  return events;
 }
 
 function fetchFromMeetup(meetupUrlName: string) {

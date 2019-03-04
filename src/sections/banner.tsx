@@ -9,7 +9,7 @@ const BannerText = styled.h1`
   color: white;
   font-size: 5em;
   font-weight: 900;
-  letter-spacing: .05em;
+  letter-spacing: 0.05em;
   text-align: center;
   text-shadow: ${textStriper({
     colorArray: [stripes.yellow, stripes.red],
@@ -18,10 +18,12 @@ const BannerText = styled.h1`
   text-transform: uppercase;
 `;
 
-export const Banner = () => (
+const Banner: React.FC = () => (
   <BannerText>
     Acadiana
     <br />
     Software Group
   </BannerText>
 );
+
+export default Banner;

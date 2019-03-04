@@ -2,10 +2,13 @@ import React from "react";
 
 import { Container } from "../styles/alignment";
 import { SectionHeader } from "../styles/typography";
+import UpcomingEvents from "../components/UpcomingEvents";
 
-export const Events = () => (
+const Events: React.FC = () => (
   <Container>
     <SectionHeader>Events</SectionHeader>
-    <p>Let's throw a calendar or something in here</p>
+    <UpcomingEvents maxEvents={2} />
   </Container>
 );
+
+export default Events;

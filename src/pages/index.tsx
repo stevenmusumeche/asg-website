@@ -1,13 +1,13 @@
 import React from "react";
 
-import Layout from "../components/layout";
-import SEO from "../components/seo";
-import { Banner } from "../sections/banner";
-import { About } from "../sections/about";
-import { Events } from "../sections/events";
-import { Join } from "../sections/join";
+import Layout from "../components/Layout";
+import SEO from "../components/Seo";
+import Banner from "../sections/Banner";
+import About from "../sections/About";
+import Events from "../sections/Events";
+import Join from "../sections/Join";
 
-const IndexPage = () => (
+const IndexPage: React.FC = () => (
   <Layout>
     <SEO
       title="Home"
@@ -22,8 +22,8 @@ const IndexPage = () => (
       ]}
     />
     <Banner />
-    <About />
     <Events />
+    <About />
     <Join />
   </Layout>
 );

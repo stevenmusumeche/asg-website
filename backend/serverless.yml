@@ -4,7 +4,6 @@ service:
 plugins:
   - serverless-dotenv-plugin
   - serverless-webpack
-  - serverless-api-gateway-caching
   - serverless-offline
 
 custom:
@@ -25,9 +24,6 @@ functions:
           path: events/upcoming
           method: get
           cors: true
-          caching:
-            enabled: true
-            ttlInSeconds: 900 # 15 mins
   joinSlack:
     handler: handler.joinSlack
     events:
@@ -35,5 +31,3 @@ functions:
           path: slack
           method: post
           cors: true
-          caching:
-            enabled: false

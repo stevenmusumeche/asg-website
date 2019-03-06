@@ -3,11 +3,11 @@ import styled from "styled-components";
 
 import Asg from "./Asg";
 import Nav from "./Nav";
-import { primaryColor } from "../styles/colors";
+import colors from "../styles/colors";
 import { Container } from "../styles/alignment";
 
 const StyledHeader = styled.header`
-  background: ${primaryColor};
+  background: ${colors.blue};
 `;
 
 /**

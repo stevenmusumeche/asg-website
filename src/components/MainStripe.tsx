@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { stripes } from "../styles/colors";
+import colors from "../styles/colors";
 
 interface StripeSvgProps {
   index: number;
@@ -63,11 +63,11 @@ const MainStripe: React.FC = () => (
   <StripesContainer>
     <ClippingPath>
       {[
-        stripes.blue,
-        stripes.white,
-        stripes.yellow,
-        stripes.red,
-        stripes.blue,
+        colors.blue,
+        colors.white,
+        colors.yellow,
+        colors.red,
+        colors.blue,
       ].map((color: string, index: number) => makeStripe({ color, index }))}
     </ClippingPath>
   </StripesContainer>

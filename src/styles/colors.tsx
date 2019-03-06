@@ -1,19 +1,17 @@
-// taken from images/flag.svg 
+// taken from images/flag.svg
 export const acadianaFlag = {
   red: "#c00",
   blue: "navy",
   yellow: "#fd0",
 };
 
-export const primaryColor = acadianaFlag.blue;
-export const secondaryColor = acadianaFlag.red;
-
-/**
- * Colors for stripes in acronym and design elements
- */
-export const stripes = {
-  blue: primaryColor,
-  white: "#fff",
-  yellow: acadianaFlag.yellow,
-  red: acadianaFlag.red
-}
+export default {
+  lightBlue: "#43fff4",
+  blue: "#0e1eb3",
+  lightYellow: "#ffdc62",
+  yellow: "#efbf17",
+  orange: "#d55a14",
+  red: "#b50f0f",
+  pink: "#d04a4a",
+  white: "#ffffff",
+};

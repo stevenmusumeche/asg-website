@@ -2,10 +2,10 @@ import React from "react";
 import styled from "styled-components";
 
 import { textStriper } from "../styles/typography";
-import { stripes, acadianaFlag } from "../styles/colors";
+import colors from "../styles/colors";
 
 const BannerText = styled.h1`
-  background: ${acadianaFlag.blue};
+  background: ${colors.blue};
   color: white;
   font-size: 5em;
   font-weight: 900;
@@ -13,7 +13,7 @@ const BannerText = styled.h1`
   margin-bottom: 0;
   text-align: center;
   text-shadow: ${textStriper({
-    colorArray: [stripes.yellow, stripes.red],
+    colorArray: [colors.yellow, colors.red],
     step: 0.035,
   })};
   text-transform: uppercase;

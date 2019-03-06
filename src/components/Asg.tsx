@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 
 import { Link, textStriper } from "../styles/typography";
-import { stripes } from "../styles/colors";
+import colors from "../styles/colors";
 
 const AsgText = styled.h1`
   color: white;
@@ -10,7 +10,7 @@ const AsgText = styled.h1`
   letter-spacing: 0.05em;
   margin: 0 0 0 0.1em;
   text-shadow: ${textStriper({
-    colorArray: [stripes.yellow, stripes.red],
+    colorArray: [colors.yellow, colors.red],
     step: 0.05,
   })};
   text-transform: uppercase;

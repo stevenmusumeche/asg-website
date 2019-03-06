@@ -7,6 +7,7 @@ import About from "../sections/About";
 import Events from "../sections/Events";
 import Join from "../sections/Join";
 import MainStripe from "../components/MainStripe";
+import UpcomingTalk from "../sections/UpcomingTalk";
 
 const IndexPage: React.FC = () => (
   <Layout>
@@ -23,7 +24,7 @@ const IndexPage: React.FC = () => (
       ]}
     />
     <Banner />
-    <MainStripe />
+    <UpcomingTalk />
     <Events />
     <About />
     <Join />

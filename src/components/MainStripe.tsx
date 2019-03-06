@@ -16,11 +16,12 @@ interface StripeProps {
  * Contains all of the main stripes
  */
 const StripesContainer = styled.div`
+  background-color: white;
   position: relative;
   height: 25vw;
   overflow: hidden;
   width: 100%;
-  z-index: -1;
+  z-index: 0;
 `;
 
 /**

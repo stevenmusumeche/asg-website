@@ -11,10 +11,11 @@ const BannerText = styled.h1`
   font-weight: 900;
   letter-spacing: 0.05em;
   margin-bottom: 0;
+  padding: .5em 0;
   text-align: center;
   text-shadow: ${textStriper({
     colorArray: [colors.yellow, colors.red],
-    step: 0.035,
+    step: 0.05,
   })};
   text-transform: uppercase;
 `;

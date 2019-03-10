@@ -4,15 +4,15 @@ import Layout from "../components/Layout";
 import SEO from "../components/Seo";
 import Banner from "../sections/Banner";
 import About from "../sections/About";
-import Events from "../sections/Events";
+import PastEvents from "../sections/PastEvents";
 import Join from "../sections/Join";
 import MainStripe from "../components/MainStripe";
-import UpcomingTalk from "../sections/UpcomingTalk";
+import UpcomingTalk from "../sections/UpcomingEvents";
 
 const IndexPage: React.FC = () => (
   <Layout>
     <SEO
-      title="Home"
+      title="Acadiana Software Group | Lafayette, LA Developer Meetup"
       keywords={[
         `acadia`,
         `acadiana`,
@@ -25,7 +25,7 @@ const IndexPage: React.FC = () => (
     />
     <Banner />
     <UpcomingTalk />
-    <Events />
+    <PastEvents />
     <About />
     <Join />
   </Layout>

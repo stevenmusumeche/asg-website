@@ -38,7 +38,7 @@ const ClippingPath = styled.div`
 const StripeSvg = styled.svg(
   (props: StripeSvgProps) => `
   position: absolute;
-  top: ${props.index * 10}px;
+  top: ${props.index * 13}px;
   width: 100%;
   height: 40vw;
   z-index: -${props.index};
@@ -63,13 +63,9 @@ const makeStripe: React.FC<StripeProps> = ({ color, index }) => (
 const MainStripe: React.FC = () => (
   <StripesContainer>
     <ClippingPath>
-      {[
-        colors.blue,
-        colors.white,
-        colors.yellow,
-        colors.red,
-        colors.blue,
-      ].map((color: string, index: number) => makeStripe({ color, index }))}
+      {[colors.blue, colors.white, colors.yellow, colors.red, colors.blue].map(
+        (color: string, index: number) => makeStripe({ color, index })
+      )}
     </ClippingPath>
   </StripesContainer>
 );

@@ -24,7 +24,7 @@ export default typography;
  * Sets the id for anchor links
  */
 export const SectionHeader = ({ children }: { children: string }) => (
-  <h1 id={children.toLowerCase()}>{children}</h1>
+  <h1 id={children.toLowerCase().replace(" ", "-")}>{children}</h1>
 );
 
 /**

@@ -9,7 +9,7 @@ import MainStripe from "../components/MainStripe";
 const Section = styled.div`
   background-color: ${colors.blue};
   color: ${colors.white};
-  padding: 3em 0 0;
+  padding: 2em 0 0;
 
   a {
     color: ${colors.white};
@@ -23,16 +23,18 @@ const Container = styled(AlignmentContainer)`
 `;
 
 const Header = styled.h1`
-  font-size: 1.5em;
-  letter-spacing: 0.1em;
+  font-size: 1.1em;
+  font-weight: 400;
+  letter-spacing: 0.05em;
   text-transform: uppercase;
+  font-smoothing: antialiased;
 `;
 
 const UpcomingTalk: React.FC = () => (
   <Section>
     <Container>
-      <Header>Upcoming Talk</Header>
-      <UpcomingEvents maxEvents={1} />
+      <Header>Upcoming Events:</Header>
+      <UpcomingEvents maxEvents={2} />
     </Container>
     <MainStripe />
   </Section>

@@ -1,7 +1,6 @@
 import React from "react";
 import styled from "styled-components";
 
-import Asg from "./Asg";
 import Nav from "./Nav";
 import colors from "../styles/colors";
 import { Container } from "../styles/alignment";
@@ -17,7 +16,7 @@ const HeaderContainer = styled(Container)`
   align-items: center;
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-end;
 `;
 
 /**
@@ -26,7 +25,6 @@ const HeaderContainer = styled(Container)`
 const Header: React.FC = () => (
   <StyledHeader>
     <HeaderContainer>
-      <Asg />
       <Nav />
     </HeaderContainer>
   </StyledHeader>

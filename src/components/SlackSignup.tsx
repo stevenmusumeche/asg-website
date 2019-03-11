@@ -21,8 +21,7 @@ const Interactive = `
   border-color: ${colors.white};
   border-radius: 3px;
   background: transparent;
-  -moz-appearance: none;
-  -webkit-appearance: none;
+  appearance: none;
 `;
 
 const EmailInput = styled.input<{ hasError: boolean }>`

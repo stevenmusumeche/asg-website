@@ -29,7 +29,6 @@ const StripesContainer = styled.div`
  */
 const ClippingPath = styled.div`
   position: relative;
-  /*margin-top: -20vw;*/
 `;
 
 /**

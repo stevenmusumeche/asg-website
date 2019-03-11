@@ -2,13 +2,91 @@ import React, { useState } from "react";
 import wretch from "wretch";
 import styled from "styled-components";
 
+import { fonts } from "../styles/typography";
+import colors from "../styles/colors";
+
 interface Props {}
 
 const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
-const EmailInput = styled.input<{ hasError: boolean }>`
-  border-color: ${props => (props.hasError ? "red" : "grey")};
+const Form = styled.form`
+  margin-bottom: 0;
 `;
+
+const Interactive = `
+  padding: .15em .6em;
+  font-size: 1em;
+  color: ${colors.white};
+  border: 3px solid;
+  border-color: ${colors.white};
+  border-radius: 3px;
+  background: transparent;
+  appearance: none;
+`;
+
+const EmailInput = styled.input<{ hasError: boolean }>`
+  ${Interactive}
+  border-color: ${props => (props.hasError ? colors.red : colors.white)};
+  vertical-align: bottom;
+  &:focus {
+    border-color: ${colors.yellow};
+  }
+`;
+
+const Button = styled.button`
+  ${Interactive}
+  position: relative;
+  padding-top: .3em;
+  padding-bottom: 0;
+  margin-left: .5em;
+  font-family: ${fonts.display};
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+  background-color: ${colors.blue};
+  cursor: pointer;
+
+  &:before,
+  &:after {
+    content: '';
+    display: block;
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 3px solid;
+    border-radius: 3px;
+    transform: translate(0,0);
+    transition: transform .1s;
+  }
+
+  &:before {
+    border-color: ${colors.yellow};
+    z-index: -1;
+  }
+
+  &:after {
+    border-color: ${colors.red};
+    z-index: -2;
+  }
+
+  &:focus,
+  &:active {
+    background-color: #868FD9;
+  }
+
+  &:hover {
+    &:before {
+      transform: translate(2px, 2px);
+    }
+    &:after {
+      transform: translate(5px, 5px);
+    }
+  }
+`;
+/*
+  */
 
 const SlackSignup: React.FC<Props> = () => {
   const [email, setEmail] = useState("");
@@ -55,19 +133,20 @@ const SlackSignup: React.FC<Props> = () => {
   }
 
   return (
-    <form onSubmit={handleSubmit}>
+    <Form onSubmit={handleSubmit}>
       <EmailInput
         name="email"
         value={email}
+        placeholder="developer@gmail.com"
         onChange={handleChange}
         hasError={error !== ""}
       />
       {!submitting ? (
-        <button type="submit">Join</button>
+        <Button type="submit">Join</Button>
       ) : (
-        <button disabled>Submitting</button>
+        <Button disabled>Submitting...</Button>
       )}
-    </form>
+    </Form>
   );
 };
 

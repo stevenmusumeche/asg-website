@@ -16,11 +16,11 @@ interface StripeProps {
  * Contains all of the main stripes
  */
 const StripesContainer = styled.div`
-  background-color: white;
   position: relative;
-  height: 25vw;
-  overflow: hidden;
+  height: calc(15vw + 52px);
   width: 100%;
+  margin-top: -7vw;
+  margin-bottom: 1em;
   z-index: 0;
 `;
 
@@ -29,7 +29,6 @@ const StripesContainer = styled.div`
  */
 const ClippingPath = styled.div`
   position: relative;
-  margin-top: -20vw;
 `;
 
 /**
@@ -40,7 +39,7 @@ const StripeSvg = styled.svg(
   position: absolute;
   top: ${props.index * 13}px;
   width: 100%;
-  height: 40vw;
+  height: 15vw;
   z-index: -${props.index};
 `
 );
@@ -53,7 +52,7 @@ const makeStripe: React.FC<StripeProps> = ({ color, index }) => (
   <StripeSvg
     index={index}
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 100 200"
+    viewBox="0 75 100 125"
     preserveAspectRatio="none"
   >
     <polygon fill={color} points="0,0 0,200 100,110 100,0" />

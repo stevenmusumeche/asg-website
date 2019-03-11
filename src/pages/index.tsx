@@ -8,6 +8,7 @@ import PastEvents from "../sections/PastEvents";
 import Join from "../sections/Join";
 import MainStripe from "../components/MainStripe";
 import UpcomingTalk from "../sections/UpcomingEvents";
+import { GlobalStyle } from "../styles/typography";
 
 const IndexPage: React.FC = () => (
   <Layout>
@@ -23,8 +24,10 @@ const IndexPage: React.FC = () => (
         `acadiana software group`,
       ]}
     />
+    <GlobalStyle />
     <Banner />
     <UpcomingTalk />
+    <MainStripe />
     <PastEvents />
     <About />
     <Join />

@@ -4,12 +4,11 @@ import styled from "styled-components";
 import UpcomingEvents from "../components/UpcomingEvents";
 import { Container as AlignmentContainer } from "../styles/alignment";
 import colors from "../styles/colors";
-import MainStripe from "../components/MainStripe";
+import { fonts, FontSmooth } from "../styles/typography";
 
-const Section = styled.div`
+const Section = styled.section`
   background-color: ${colors.blue};
   color: ${colors.white};
-  padding: 2em 0 0;
 
   a {
     color: ${colors.white};
@@ -17,17 +16,18 @@ const Section = styled.div`
 `;
 
 const Container = styled(AlignmentContainer)`
-  margin-bottom: -1vw;
   position: relative;
   z-index: 1;
 `;
 
-const Header = styled.h1`
+const Header = styled.h2`
+  margin-bottom: .75em;
+  font-family: ${fonts.display};
   font-size: 1.1em;
-  font-weight: 400;
+  font-weight: 500;
   letter-spacing: 0.05em;
   text-transform: uppercase;
-  font-smoothing: antialiased;
+  ${FontSmooth}
 `;
 
 const UpcomingTalk: React.FC = () => (
@@ -36,7 +36,6 @@ const UpcomingTalk: React.FC = () => (
       <Header>Upcoming Events:</Header>
       <UpcomingEvents maxEvents={2} />
     </Container>
-    <MainStripe />
   </Section>
 );
 

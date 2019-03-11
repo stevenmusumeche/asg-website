@@ -14,7 +14,6 @@ interface Props {
 const Layout: React.FC<Props> = ({ children }) => (
   <>
     <TypographyStyle typography={typography} />
-    <GoogleFont typography={typography} />
     <Header />
     <main>{children}</main>
     <footer />

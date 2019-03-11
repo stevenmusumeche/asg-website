@@ -1,10 +1,10 @@
 import React from "react";
 
-import { NavLink } from "../styles/typography";
+import { NavLink, FontSmooth } from "../styles/typography";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  font-smoothing: antialiased;
+  ${FontSmooth}
 `;
 
 /**
@@ -12,8 +12,8 @@ const Wrapper = styled.div`
  */
 const Nav: React.FC = () => (
   <Wrapper>
-    <NavLink to={`#about`}>About ASG</NavLink>
-    <NavLink to={`#past-events`}>Past Events</NavLink>
+    <NavLink to={`#about`}>About&nbsp;ASG</NavLink>
+    <NavLink to={`#past-events`}>Past&nbsp;Events</NavLink>
     <NavLink
       onClick={e => {
         e.preventDefault();
@@ -21,7 +21,7 @@ const Nav: React.FC = () => (
       }}
       to={`#`}
     >
-      Join Slack
+      Join&nbsp;Slack
     </NavLink>
   </Wrapper>
 );

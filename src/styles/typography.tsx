@@ -4,27 +4,53 @@
  */
 import Typography, { TypographyOptions } from "typography";
 import React from "react";
-import styled from "styled-components";
+import styled, { createGlobalStyle } from "styled-components";
+import colors from "./colors";
 
 import GatsbyLink from "gatsby-link";
+
+export const GlobalStyle = createGlobalStyle`
+  @font-face {
+    font-family: system;
+    font-style: normal;
+    font-weight: 300;
+    src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Light"), local("Roboto-Light"), local("DroidSans"), local("Tahoma");
+  }
+`;
+
+export const fonts = {
+  default: "sofia-pro",
+  display: "itc-avant-garde-gothic-pro",
+  fallback: "system"
+}
 
 /**
  * Sets major font families for our design.
  * For a full list of options see: https://kyleamathews.github.io/typography.js/
  */
 const config: TypographyOptions = {
-  headerFontFamily: ["itc-avant-garde-gothic-pro", "sans-serif"],
-  headerWeight: "400",
-  bodyFontFamily: ["sofia-pro", "sans-serif"],
+  headerFontFamily: [fonts.default, fonts.fallback, "sans-serif"],
+  headerWeight: "700",
+  bodyFontFamily: [fonts.default, fonts.fallback, "sans-serif"],
+  bodyColor: colors.blue,
+  baseFontSize: "18px"
 };
 const typography = new Typography(config);
 export default typography;
 
+
 /**
  * Sets the id for anchor links
  */
-export const SectionHeader = ({ children }: { children: string }) => (
-  <h1 id={children.toLowerCase().replace(" ", "-")}>{children}</h1>
+const SectionHeaderStyled = styled.h2`
+  font-size: 1.5em;
+
+  @media screen and (min-width: 640px) {
+    font-size: 2em;
+  }
+`;
+export const SectionHeader = ({ children, className }: { children: string, className: string }) => (
+  <SectionHeaderStyled id={children.toLowerCase().replace(" ", "-")} className={className}>{children}</SectionHeaderStyled>
 );
 
 /**
@@ -38,12 +64,26 @@ export const Link = styled(GatsbyLink)`
  * Links for navigation
  */
 export const NavLink = styled(Link)`
-  color: white;
-  font-family: ${(config as any).headerFontFamily.join(`,`)};
+  display: inline-block;
+  margin: 0 .5em .5em;
+  font-family: ${fonts.display};
+  font-weight: 700;
   letter-spacing: 0.15em;
-  margin-left: 2em;
+  color: white;
   text-decoration: none;
   text-transform: uppercase;
+
+  @media screen and (min-width: 768px) {
+    margin: 0 1em .5em;
+  }
+`;
+
+/**
+ * Used for better font rendering on Mac with white text on blue bg
+ */
+export const FontSmooth = () => `
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
 `;
 
 /**

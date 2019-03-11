@@ -4,6 +4,7 @@ import { useEvents } from "../hooks/useEvents";
 import styled from "styled-components";
 import ExternalLinkImage from "../images/external-link.svg";
 import LoaderImage from "../images/loader.svg";
+import { FontSmooth } from "../styles/typography";
 
 interface Props {
   maxEvents?: number;
@@ -11,29 +12,33 @@ interface Props {
 
 const List = styled.ul`
   margin: 0;
-  margin-bottom: -8em;
   list-style-type: none;
-  font-smoothing: antialiased;
+  ${FontSmooth}
+  
+  @media screen and (min-width: 640px) {
+    font-size: 1.2em;
+  }
 `;
 
 const ListItem = styled.li`
-  margin: 0 0 2em 0;
+  margin: 0;
   padding: 0;
+  & + & {
+    margin-top: 2em;
+  }
 `;
 
 const EventName = styled.h3`
-  font-size: 2em;
-  margin-bottom: 0em;
+  font-size: 1.5em;
+  margin-bottom: .25em;
 `;
 
-const EventDate = styled.div`
-  font-size: 1.2em;
-`;
+const EventDate = styled.div``;
 
 const EventLocation = styled.a`
-  font-size: 1.2em;
   display: inline-block;
   text-decoration: none;
+
   &:hover {
     text-decoration: underline;
   }

@@ -13,10 +13,7 @@ const StyledHeader = styled.header`
  * Sets max width, centering, and alignment for header. Extends Container
  */
 const HeaderContainer = styled(Container)`
-  align-items: center;
-  display: flex;
-  flex-direction: row;
-  justify-content: flex-end;
+  text-align: center;
 `;
 
 /**

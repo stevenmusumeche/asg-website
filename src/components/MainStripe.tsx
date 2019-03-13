@@ -54,6 +54,7 @@ const makeStripe: React.FC<StripeProps> = ({ color, index }) => (
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 75 100 125"
     preserveAspectRatio="none"
+    key={index}
   >
     <polygon fill={color} points="0,0 0,200 100,110 100,0" />
   </StripeSvg>

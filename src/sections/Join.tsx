@@ -2,7 +2,6 @@ import React from "react";
 
 import styled from "styled-components";
 
-import SlackSignup from "../components/SlackSignup";
 import { SectionHeader } from "../styles/typography";
 import { Container } from "../styles/alignment";
 import colors from "../styles/colors";
@@ -30,7 +29,7 @@ const FlexWrapper = styled.div`
 const InlineSectionHeader = styled(SectionHeader)`
   @media screen and (min-width: 640px) {
     margin-bottom: 0;
-    margin-right: .5em;
+    margin-right: 0.5em;
   }
 `;
 
@@ -38,8 +37,7 @@ const Join: React.FC = () => (
   <BlueSection>
     <Container>
       <FlexWrapper>
-        <InlineSectionHeader>Join ASG</InlineSectionHeader>
-        <SlackSignup />
+        <InlineSectionHeader>Some Content Here</InlineSectionHeader>
       </FlexWrapper>
     </Container>
   </BlueSection>

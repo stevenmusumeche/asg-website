@@ -14,4 +14,5 @@ export default {
   red: "#b50f0f",
   pink: "#d04a4a",
   white: "#ffffff",
+  grey: "rgba(0,0,0,.4)",
 };

@@ -16,13 +16,40 @@ export const GlobalStyle = createGlobalStyle`
     font-weight: 300;
     src: local(".SFNSText-Light"), local(".HelveticaNeueDeskInterface-Light"), local(".LucidaGrandeUI"), local("Ubuntu Light"), local("Segoe UI Light"), local("Roboto-Light"), local("DroidSans"), local("Tahoma");
   }
+
+  .slack-modal-content {
+    border: 1px solid #ccc;
+    background: #fff;
+    overflow: auto;
+    webkit-overflow-scrolling: touch;
+    border-radius: 4px;
+    outline: none;
+    padding: 2em;
+    z-index: 100;
+    & p {
+      color: black;
+    }
+  }
+
+  .slack-modal-overlay {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.75);
+    z-index: 99;
+  }
 `;
 
 export const fonts = {
   default: "sofia-pro",
   display: "itc-avant-garde-gothic-pro",
-  fallback: "system"
-}
+  fallback: "system",
+};
 
 /**
  * Sets major font families for our design.
@@ -33,11 +60,10 @@ const config: TypographyOptions = {
   headerWeight: "700",
   bodyFontFamily: [fonts.default, fonts.fallback, "sans-serif"],
   bodyColor: colors.blue,
-  baseFontSize: "18px"
+  baseFontSize: "18px",
 };
 const typography = new Typography(config);
 export default typography;
-
 
 /**
  * Sets the id for anchor links
@@ -49,8 +75,19 @@ const SectionHeaderStyled = styled.h2`
     font-size: 2em;
   }
 `;
-export const SectionHeader = ({ children, className }: { children: string, className: string }) => (
-  <SectionHeaderStyled id={children.toLowerCase().replace(" ", "-")} className={className}>{children}</SectionHeaderStyled>
+export const SectionHeader = ({
+  children,
+  className,
+}: {
+  children: string;
+  className?: string;
+}) => (
+  <SectionHeaderStyled
+    id={children.toLowerCase().replace(" ", "-")}
+    className={className}
+  >
+    {children}
+  </SectionHeaderStyled>
 );
 
 /**
@@ -63,9 +100,9 @@ export const Link = styled(GatsbyLink)`
 /**
  * Links for navigation
  */
-export const NavLink = styled(Link)`
+export const NavLink = styled.a`
   display: inline-block;
-  margin: 0 .5em .5em;
+  margin: 0 0.5em 0.5em;
   font-family: ${fonts.display};
   font-weight: 700;
   letter-spacing: 0.15em;
@@ -74,7 +111,7 @@ export const NavLink = styled(Link)`
   text-transform: uppercase;
 
   @media screen and (min-width: 768px) {
-    margin: 0 1em .5em;
+    margin: 0 1em 0.5em;
   }
 `;
 

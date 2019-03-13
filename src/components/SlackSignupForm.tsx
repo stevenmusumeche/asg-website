@@ -5,60 +5,70 @@ import styled from "styled-components";
 import { fonts } from "../styles/typography";
 import colors from "../styles/colors";
 
-interface Props {}
+interface Props {
+  close: () => void;
+}
 
 const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
 
 const Form = styled.form`
   margin-bottom: 0;
-`;
-
-const Interactive = `
-  padding: .15em .6em;
-  font-size: 1em;
-  color: ${colors.white};
-  border: 3px solid;
-  border-color: ${colors.white};
-  border-radius: 3px;
-  background: transparent;
-  appearance: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 2em;
 `;
 
 const EmailInput = styled.input<{ hasError: boolean }>`
-  ${Interactive}
-  border-color: ${props => (props.hasError ? colors.red : colors.white)};
+  font-size: 1.2em;
+  padding: 0 0.6em;
+  border: 1px solid;
+  color: ${colors.grey};
+  border-color: ${props => (props.hasError ? colors.red : colors.grey)};
+  width: 500px;
   vertical-align: bottom;
   &:focus {
     border-color: ${colors.yellow};
+    outline: none;
   }
+  transform: translate(0, 3px);
+  line-height: 2.6;
 `;
 
 const Button = styled.button`
-  ${Interactive}
+  font-size: 1.2em;
+  color: ${colors.white};
+  border-color: ${colors.white};
   position: relative;
-  padding-top: .3em;
-  padding-bottom: 0;
-  margin-left: .5em;
+  padding: 0 1em;
+  border: 3px solid;
+  margin-left: 0.5em;
   font-family: ${fonts.display};
   font-weight: 700;
-  letter-spacing: .1em;
+  letter-spacing: 0.1em;
   text-transform: uppercase;
   background-color: ${colors.blue};
   cursor: pointer;
+  transition: all 0.2s;
+  line-height: 2.3;
+  appearance: none;
 
   &:before,
   &:after {
-    content: '';
+    content: "";
     display: block;
     position: absolute;
-    top: -2px;
-    left: -2px;
-    right: -2px;
-    bottom: -2px;
+    top: 0px;
+    left: 0px;
+    right: -4px;
+    bottom: -4px;
     border: 3px solid;
-    border-radius: 3px;
-    transform: translate(0,0);
-    transition: transform .1s;
+    transform: translate(2px, 2px);
+    transition: transform 0.1s;
+  }
+
+  &:after {
+    transform: translate(5px, 5px);
   }
 
   &:before {
@@ -71,24 +81,15 @@ const Button = styled.button`
     z-index: -2;
   }
 
-  &:focus,
-  &:active {
-    background-color: #868FD9;
-  }
-
   &:hover {
-    &:before {
-      transform: translate(2px, 2px);
-    }
-    &:after {
-      transform: translate(5px, 5px);
-    }
+    background-color: #394bef;
   }
 `;
 /*
-  */
+ */
 
-const SlackSignup: React.FC<Props> = () => {
+// todo change to useReducer
+const SlackSignupForm: React.FC<Props> = () => {
   const [email, setEmail] = useState("");
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
@@ -112,11 +113,11 @@ const SlackSignup: React.FC<Props> = () => {
     setTimeout(() => {}, 2000);
 
     try {
-      const result = await wretch(
-        "https://wnephqc0h5.execute-api.us-east-1.amazonaws.com/prod/slack"
-      )
-        .post({ email })
-        .json();
+      // const result = await wretch(
+      //   "https://wnephqc0h5.execute-api.us-east-1.amazonaws.com/prod/slack"
+      // )
+      //   .post({ email })
+      //   .json();
 
       setSubmitting(false);
       setSubmitted(true);
@@ -133,20 +134,30 @@ const SlackSignup: React.FC<Props> = () => {
   }
 
   return (
-    <Form onSubmit={handleSubmit}>
-      <EmailInput
-        name="email"
-        value={email}
-        placeholder="developer@gmail.com"
-        onChange={handleChange}
-        hasError={error !== ""}
-      />
-      {!submitting ? (
-        <Button type="submit">Join</Button>
-      ) : (
-        <Button disabled>Submitting...</Button>
-      )}
-    </Form>
+    <>
+      <h1>Join Acadiana Software Group on Slack</h1>
+      <p>
+        Please enter your email address below to request an invite to the ASG
+        Slack.
+      </p>
+      <Form onSubmit={handleSubmit}>
+        <EmailInput
+          name="email"
+          value={email}
+          placeholder="developer@gmail.com"
+          onChange={handleChange}
+          hasError={error !== ""}
+        />
+        {!submitting ? (
+          <Button type="submit">Join</Button>
+        ) : (
+          <Button disabled>Submitting...</Button>
+        )}
+      </Form>
+      <p>
+        <button onClick={close}>close modal</button>
+      </p>
+    </>
   );
 };
 
@@ -167,4 +178,4 @@ const validateEmail = (email: string): boolean => {
   return true;
 };
 
-export default SlackSignup;
+export default SlackSignupForm;

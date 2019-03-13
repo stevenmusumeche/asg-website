@@ -1,5 +1,5 @@
 import React from "react";
-import { TypographyStyle, GoogleFont } from "react-typography";
+import { TypographyStyle } from "react-typography";
 
 import Header from "./Header";
 import typography from "../styles/typography";

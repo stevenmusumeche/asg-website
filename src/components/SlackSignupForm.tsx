@@ -1,6 +1,8 @@
 import React, { useState } from "react";
-import wretch from "wretch";
 import styled from "styled-components";
+import CloseIcon from "../images/close.svg";
+import CheckmarkIcon from "../images/checkmark.svg";
+import wretch from "wretch";
 
 import { fonts } from "../styles/typography";
 import colors from "../styles/colors";
@@ -9,14 +11,119 @@ interface Props {
   close: () => void;
 }
 
-const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
+const Success: React.FC = () => (
+  <SuccessWrapper>
+    <img src={CheckmarkIcon} style={{ width: "200px", margin: "0 2em" }} />
+    <div>You should receive an invitation within 24 hours.</div>
+    <CloseButton onClick={close} type="button">
+      <StyledCloseIcon src={CloseIcon} alt="close" />
+    </CloseButton>
+  </SuccessWrapper>
+);
+
+// todo change to useReducer
+const SlackSignupForm: React.FC<Props> = ({ close }) => {
+  const [email, setEmail] = useState("");
+  const [error, setError] = useState("");
+  const [submitting, setSubmitting] = useState(false);
+  const [submitted, setSubmitted] = useState(false);
+
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setEmail(e.target.value);
+    setError("");
+  };
+
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    if (!validateEmail(email.trim())) {
+      setError("Invalid email address");
+      return;
+    }
+
+    setError("");
+    setSubmitting(true);
+
+    try {
+      // const result = await wretch(
+      //   "https://wnephqc0h5.execute-api.us-east-1.amazonaws.com/prod/slack"
+      // )
+      //   .post({ email: email.trim() })
+      //   .json();
+      setTimeout(() => {
+        setSubmitting(false);
+        setSubmitted(true);
+      }, 2000);
+    } catch (e) {
+      setSubmitting(false);
+      setError(
+        "Well shit.  There was a server error when processing this form."
+      );
+    }
+  };
+
+  return !submitted ? (
+    <>
+      <h1>Join Acadiana Software Group on Slack</h1>
+      <p>
+        Please enter your email address below to request an invite to the ASG
+        Slack. You should receive an invitation within 24 hours.
+      </p>
+
+      <Form onSubmit={handleSubmit}>
+        <div>
+          <EmailInput
+            name="email"
+            value={email}
+            placeholder="developer@gmail.com"
+            onChange={handleChange}
+            hasError={error !== ""}
+          />
+          {error && <ErrorMessage>{error}</ErrorMessage>}
+        </div>
+        {!submitting ? (
+          <Button type="submit" disabled={!!error}>
+            Join
+          </Button>
+        ) : (
+          <Button disabled>Joining</Button>
+        )}
+      </Form>
+      <CloseButton onClick={close} type="button">
+        <StyledCloseIcon src={CloseIcon} alt="close" />
+      </CloseButton>
+    </>
+  ) : (
+    <Success />
+  );
+};
+
+const validateEmail = (email: string): boolean => {
+  const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
+
+  if (!email) return false;
+  if (email.length > 254) return false;
+
+  const valid = emailRegex.test(email);
+  if (!valid) return false;
+
+  // Further checking of some things regex can't handle
+  var parts = email.split("@");
+  if (parts[0].length > 64) return false;
+
+  var domainParts = parts[1].split(".");
+  if (domainParts.some(part => part.length > 63)) return false;
+
+  return true;
+};
+
+export default SlackSignupForm;
 
 const Form = styled.form`
   margin-bottom: 0;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
-  margin-bottom: 2em;
 `;
 
 const EmailInput = styled.input<{ hasError: boolean }>`
@@ -41,6 +148,7 @@ const Button = styled.button`
   border-color: ${colors.white};
   position: relative;
   padding: 0 1em;
+  min-width: 170px;
   border: 3px solid;
   margin-left: 0.5em;
   font-family: ${fonts.display};
@@ -67,16 +175,13 @@ const Button = styled.button`
     transition: transform 0.1s;
   }
 
-  &:after {
-    transform: translate(5px, 5px);
-  }
-
   &:before {
     border-color: ${colors.yellow};
     z-index: -1;
   }
 
   &:after {
+    transform: translate(5px, 5px);
     border-color: ${colors.red};
     z-index: -2;
   }
@@ -84,98 +189,34 @@ const Button = styled.button`
   &:hover {
     background-color: #394bef;
   }
-`;
-/*
- */
 
-// todo change to useReducer
-const SlackSignupForm: React.FC<Props> = () => {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    setError("");
-  };
-
-  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-
-    if (!validateEmail(email)) {
-      setError("Invalid email address");
-      return;
-    }
-
-    setError("");
-    setSubmitting(true);
-    setTimeout(() => {}, 2000);
-
-    try {
-      // const result = await wretch(
-      //   "https://wnephqc0h5.execute-api.us-east-1.amazonaws.com/prod/slack"
-      // )
-      //   .post({ email })
-      //   .json();
-
-      setSubmitting(false);
-      setSubmitted(true);
-    } catch (e) {
-      console.log(e);
-
-      setSubmitting(false);
-      setError("Error joining");
-    }
-  };
-
-  if (submitted) {
-    return <div>Join request sent for approval</div>;
+  &:disabled {
+    cursor: not-allowed;
   }
+`;
 
-  return (
-    <>
-      <h1>Join Acadiana Software Group on Slack</h1>
-      <p>
-        Please enter your email address below to request an invite to the ASG
-        Slack.
-      </p>
-      <Form onSubmit={handleSubmit}>
-        <EmailInput
-          name="email"
-          value={email}
-          placeholder="developer@gmail.com"
-          onChange={handleChange}
-          hasError={error !== ""}
-        />
-        {!submitting ? (
-          <Button type="submit">Join</Button>
-        ) : (
-          <Button disabled>Submitting...</Button>
-        )}
-      </Form>
-      <p>
-        <button onClick={close}>close modal</button>
-      </p>
-    </>
-  );
-};
+const ErrorMessage = styled.div`
+  color: ${colors.red};
+  margin-top: 0.3em;
+`;
 
-const validateEmail = (email: string): boolean => {
-  if (!email) return false;
-  if (email.length > 254) return false;
+const CloseButton = styled.button`
+  position: absolute;
+  top: 0.5em;
+  right: 0.5em;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+`;
 
-  const valid = emailRegex.test(email);
-  if (!valid) return false;
+const StyledCloseIcon = styled.img`
+  width: 1em;
+  height: 1em;
+  margin: 0;
+`;
 
-  // Further checking of some things regex can't handle
-  var parts = email.split("@");
-  if (parts[0].length > 64) return false;
-
-  var domainParts = parts[1].split(".");
-  if (domainParts.some(part => part.length > 63)) return false;
-
-  return true;
-};
-
-export default SlackSignupForm;
+const SuccessWrapper = styled.div`
+  text-align: center;
+  color: black;
+`;

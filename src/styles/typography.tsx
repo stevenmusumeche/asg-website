@@ -18,13 +18,15 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   .slack-modal-content {
+    position: relative;
     border: 1px solid #ccc;
     background: #fff;
     overflow: auto;
     webkit-overflow-scrolling: touch;
     border-radius: 4px;
     outline: none;
-    padding: 2em;
+    padding: 3em 2em;
+    max-width: 750px;
     z-index: 100;
     & p {
       color: black;
@@ -42,6 +44,56 @@ export const GlobalStyle = createGlobalStyle`
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.75);
     z-index: 99;
+  }
+
+  .checkmark {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: $white;
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px $green;
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+  }
+  
+  .checkmark__circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: $green;
+    fill: none;
+    animation: stroke .6s $curve forwards;
+  }
+  
+  .checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke .3s $curve .8s forwards;
+  }
+  
+  @keyframes stroke {
+    100% {
+      stroke-dashoffset: 0;
+    }
+  }
+  
+  @keyframes scale {
+    0%, 100% {
+      transform: none;
+    }
+    50% {
+      transform: scale3d(1.1, 1.1, 1);
+    }
+  }
+  
+  @keyframes fill {
+    100% {
+      box-shadow: inset 0px 0px 0px 30px $green;
+    }
   }
 `;
 

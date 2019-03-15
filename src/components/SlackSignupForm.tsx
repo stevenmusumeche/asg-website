@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useReducer } from "react";
 import styled from "styled-components";
 import CloseIcon from "../images/close.svg";
 import CheckmarkIcon from "../images/checkmark.svg";
@@ -11,7 +11,34 @@ interface Props {
   close: () => void;
 }
 
-const Success: React.FC = () => (
+const stateReducer = (state: any, action: any) => {
+  switch (action.type) {
+    case "EMAIL_CHANGE":
+      return { ...state, email: action.payload.email, error: "" };
+    case "ERROR":
+      return {
+        ...state,
+        error: action.payload.message,
+        submitted: false,
+        submitting: false,
+      };
+    case "SUBMITTING":
+      return { ...state, submitted: false, submitting: true, error: "" };
+    case "SUBMITTED":
+      return { ...state, submitted: true, submitting: false };
+    default:
+      throw new Error("Unknown action " + action.type);
+  }
+};
+
+const initialState = {
+  email: "",
+  error: "",
+  submitting: false,
+  submitted: false,
+};
+
+const Success: React.FC<Props> = ({ close }) => (
   <SuccessWrapper>
     <img src={CheckmarkIcon} style={{ width: "200px", margin: "0 2em" }} />
     <div>You should receive an invitation within 24 hours.</div>
@@ -21,28 +48,25 @@ const Success: React.FC = () => (
   </SuccessWrapper>
 );
 
-// todo change to useReducer
 const SlackSignupForm: React.FC<Props> = ({ close }) => {
-  const [email, setEmail] = useState("");
-  const [error, setError] = useState("");
-  const [submitting, setSubmitting] = useState(false);
-  const [submitted, setSubmitted] = useState(false);
+  const [state, dispatch] = useReducer(stateReducer, initialState);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setEmail(e.target.value);
-    setError("");
+    dispatch({ type: "EMAIL_CHANGE", payload: { email: e.target.value } });
   };
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!validateEmail(email.trim())) {
-      setError("Invalid email address");
+    if (!validateEmail(state.email.trim())) {
+      dispatch({
+        type: "ERROR",
+        payload: { message: "Invalid email address" },
+      });
       return;
     }
 
-    setError("");
-    setSubmitting(true);
+    dispatch({ type: "SUBMITTING" });
 
     try {
       // const result = await wretch(
@@ -51,18 +75,20 @@ const SlackSignupForm: React.FC<Props> = ({ close }) => {
       //   .post({ email: email.trim() })
       //   .json();
       setTimeout(() => {
-        setSubmitting(false);
-        setSubmitted(true);
+        dispatch({ type: "SUBMITTED" });
       }, 2000);
     } catch (e) {
-      setSubmitting(false);
-      setError(
-        "Well shit.  There was a server error when processing this form."
-      );
+      dispatch({
+        type: "ERROR",
+        payload: {
+          message:
+            "Well shit.  There was a server error when processing this form.",
+        },
+      });
     }
   };
 
-  return !submitted ? (
+  return !state.submitted ? (
     <>
       <h1>Join Acadiana Software Group on Slack</h1>
       <p>
@@ -74,15 +100,15 @@ const SlackSignupForm: React.FC<Props> = ({ close }) => {
         <div>
           <EmailInput
             name="email"
-            value={email}
+            value={state.email}
             placeholder="developer@gmail.com"
             onChange={handleChange}
-            hasError={error !== ""}
+            hasError={state.error !== ""}
           />
-          {error && <ErrorMessage>{error}</ErrorMessage>}
+          {state.error && <ErrorMessage>{state.error}</ErrorMessage>}
         </div>
-        {!submitting ? (
-          <Button type="submit" disabled={!!error}>
+        {!state.submitting ? (
+          <Button type="submit" disabled={!!state.error}>
             Join
           </Button>
         ) : (
@@ -94,7 +120,7 @@ const SlackSignupForm: React.FC<Props> = ({ close }) => {
       </CloseButton>
     </>
   ) : (
-    <Success />
+    <Success close={close} />
   );
 };
 

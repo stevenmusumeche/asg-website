@@ -1,6 +1,7 @@
 import { listEvents } from "./services/calendar";
-import { APIGatewayProxyHandler } from "aws-lambda";
+import { APIGatewayProxyHandler, APIGatewayProxyEvent } from "aws-lambda";
 import { requestInvite } from "./services/slack";
+import { verifyToken } from "./services/recaptcha";
 
 const corsHeaders = {
   "Access-Control-Allow-Origin": "*",
@@ -26,9 +27,16 @@ export const upcomingEvents: APIGatewayProxyHandler = async () => {
 
 export const joinSlack: APIGatewayProxyHandler = async event => {
   try {
-    if (!event.body) throw new Error("invalid request");
-    const request = JSON.parse(event.body);
-    if (!request.email) throw new Error("missing email");
+    const request = validateRequest(event);
+
+    const validRecaptcha = await verifyToken(request.recaptchaToken);
+    if (!validRecaptcha) {
+      return {
+        statusCode: 401,
+        headers: corsHeaders,
+        body: "Invalid reCAPTCHA token",
+      };
+    }
     await requestInvite(request.email);
 
     return {
@@ -44,3 +52,10 @@ export const joinSlack: APIGatewayProxyHandler = async event => {
     };
   }
 };
+function validateRequest(event: APIGatewayProxyEvent) {
+  if (!event.body) throw new Error("invalid request");
+  const request = JSON.parse(event.body);
+  if (!request.email) throw new Error("missing email");
+  if (!request.recaptchaToken) throw new Error("missing reCAPTCHA token");
+  return request;
+}

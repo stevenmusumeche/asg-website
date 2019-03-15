@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import { stripes } from "../styles/colors";
+import colors from "../styles/colors";
 
 interface StripeSvgProps {
   index: number;
@@ -17,10 +17,11 @@ interface StripeProps {
  */
 const StripesContainer = styled.div`
   position: relative;
-  height: 25vw;
-  overflow: hidden;
+  height: calc(15vw + 52px);
   width: 100%;
-  z-index: -1;
+  margin-top: -7vw;
+  margin-bottom: 1em;
+  z-index: 0;
 `;
 
 /**
@@ -28,7 +29,6 @@ const StripesContainer = styled.div`
  */
 const ClippingPath = styled.div`
   position: relative;
-  margin-top: -20vw;
 `;
 
 /**
@@ -37,9 +37,9 @@ const ClippingPath = styled.div`
 const StripeSvg = styled.svg(
   (props: StripeSvgProps) => `
   position: absolute;
-  top: ${props.index * 10}px;
+  top: ${props.index * 13}px;
   width: 100%;
-  height: 40vw;
+  height: 15vw;
   z-index: -${props.index};
 `
 );
@@ -52,8 +52,9 @@ const makeStripe: React.FC<StripeProps> = ({ color, index }) => (
   <StripeSvg
     index={index}
     xmlns="http://www.w3.org/2000/svg"
-    viewBox="0 0 100 200"
+    viewBox="0 75 100 125"
     preserveAspectRatio="none"
+    key={index}
   >
     <polygon fill={color} points="0,0 0,200 100,110 100,0" />
   </StripeSvg>
@@ -62,13 +63,9 @@ const makeStripe: React.FC<StripeProps> = ({ color, index }) => (
 const MainStripe: React.FC = () => (
   <StripesContainer>
     <ClippingPath>
-      {[
-        stripes.blue,
-        stripes.white,
-        stripes.yellow,
-        stripes.red,
-        stripes.blue,
-      ].map((color: string, index: number) => makeStripe({ color, index }))}
+      {[colors.blue, colors.white, colors.yellow, colors.red, colors.blue].map(
+        (color: string, index: number) => makeStripe({ color, index })
+      )}
     </ClippingPath>
   </StripesContainer>
 );

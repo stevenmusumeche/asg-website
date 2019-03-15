@@ -1,5 +1,5 @@
 import React from "react";
-import { TypographyStyle, GoogleFont } from "react-typography";
+import { TypographyStyle } from "react-typography";
 
 import Header from "./Header";
 import typography from "../styles/typography";
@@ -14,7 +14,6 @@ interface Props {
 const Layout: React.FC<Props> = ({ children }) => (
   <>
     <TypographyStyle typography={typography} />
-    <GoogleFont typography={typography} />
     <Header />
     <main>{children}</main>
     <footer />

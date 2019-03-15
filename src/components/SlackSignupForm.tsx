@@ -1,17 +1,42 @@
-import React, { useState, useReducer } from "react";
+import React, { useReducer } from "react";
+import ReCAPTCHA from "react-google-recaptcha";
 import styled from "styled-components";
-import CloseIcon from "../images/close.svg";
-import CheckmarkIcon from "../images/checkmark.svg";
 import wretch from "wretch";
-
-import { fonts } from "../styles/typography";
+import CheckmarkIcon from "../images/checkmark.svg";
+import CloseIcon from "../images/close.svg";
 import colors from "../styles/colors";
+import { fonts } from "../styles/typography";
+
+const recaptchaClientKey = "6Lfx6ZcUAAAAANfkT0wc8BYKRVfXdr8vEk7fhe6w";
 
 interface Props {
   close: () => void;
 }
 
-const stateReducer = (state: any, action: any) => {
+interface State {
+  email: string;
+  error: string;
+  submitting: boolean;
+  submitted: boolean;
+  recaptchaCompleted: boolean;
+  recaptchaToken: string;
+}
+
+interface ReducerAction {
+  type: string;
+  payload?: any;
+}
+
+const initialState = {
+  email: "",
+  error: "",
+  submitting: false,
+  submitted: false,
+  recaptchaCompleted: false,
+  recaptchaToken: "",
+};
+
+const stateReducer = (state: State, action: ReducerAction) => {
   switch (action.type) {
     case "EMAIL_CHANGE":
       return { ...state, email: action.payload.email, error: "" };
@@ -26,27 +51,16 @@ const stateReducer = (state: any, action: any) => {
       return { ...state, submitted: false, submitting: true, error: "" };
     case "SUBMITTED":
       return { ...state, submitted: true, submitting: false };
+    case "RECAPTCHA_COMPLETED":
+      return {
+        ...state,
+        recaptchaCompleted: true,
+        recaptchaToken: action.payload.recaptchaToken,
+      };
     default:
       throw new Error("Unknown action " + action.type);
   }
 };
-
-const initialState = {
-  email: "",
-  error: "",
-  submitting: false,
-  submitted: false,
-};
-
-const Success: React.FC<Props> = ({ close }) => (
-  <SuccessWrapper>
-    <img src={CheckmarkIcon} style={{ width: "200px", margin: "0 2em" }} />
-    <div>You should receive an invitation within 24 hours.</div>
-    <CloseButton onClick={close} type="button">
-      <StyledCloseIcon src={CloseIcon} alt="close" />
-    </CloseButton>
-  </SuccessWrapper>
-);
 
 const SlackSignupForm: React.FC<Props> = ({ close }) => {
   const [state, dispatch] = useReducer(stateReducer, initialState);
@@ -69,15 +83,18 @@ const SlackSignupForm: React.FC<Props> = ({ close }) => {
     dispatch({ type: "SUBMITTING" });
 
     try {
-      // const result = await wretch(
-      //   "https://wnephqc0h5.execute-api.us-east-1.amazonaws.com/prod/slack"
-      // )
-      //   .post({ email: email.trim() })
-      //   .json();
-      setTimeout(() => {
-        dispatch({ type: "SUBMITTED" });
-      }, 2000);
+      const result = await wretch(
+        "https://wnephqc0h5.execute-api.us-east-1.amazonaws.com/prod/slack"
+      )
+        .post({
+          email: state.email.trim(),
+          recaptchaToken: state.recaptchaToken,
+        })
+        .json();
+      dispatch({ type: "SUBMITTED" });
     } catch (e) {
+      console.error(e);
+
       dispatch({
         type: "ERROR",
         payload: {
@@ -96,6 +113,13 @@ const SlackSignupForm: React.FC<Props> = ({ close }) => {
         Slack. You should receive an invitation within 24 hours.
       </p>
 
+      <StyledRecaptcha
+        sitekey={recaptchaClientKey}
+        onChange={recaptchaToken =>
+          dispatch({ type: "RECAPTCHA_COMPLETED", payload: { recaptchaToken } })
+        }
+      />
+
       <Form onSubmit={handleSubmit}>
         <div>
           <EmailInput
@@ -108,7 +132,10 @@ const SlackSignupForm: React.FC<Props> = ({ close }) => {
           {state.error && <ErrorMessage>{state.error}</ErrorMessage>}
         </div>
         {!state.submitting ? (
-          <Button type="submit" disabled={!!state.error}>
+          <Button
+            type="submit"
+            disabled={!!state.error || !state.recaptchaCompleted}
+          >
             Join
           </Button>
         ) : (
@@ -123,6 +150,16 @@ const SlackSignupForm: React.FC<Props> = ({ close }) => {
     <Success close={close} />
   );
 };
+
+const Success: React.FC<Props> = ({ close }) => (
+  <SuccessWrapper>
+    <img src={CheckmarkIcon} style={{ width: "200px", margin: "0 2em" }} />
+    <div>You should receive an invitation within 24 hours.</div>
+    <CloseButton onClick={close} type="button">
+      <StyledCloseIcon src={CloseIcon} alt="close" />
+    </CloseButton>
+  </SuccessWrapper>
+);
 
 const validateEmail = (email: string): boolean => {
   const emailRegex = /^[-!#$%&'*+\/0-9=?A-Z^_a-z{|}~](\.?[-!#$%&'*+\/0-9=?A-Z^_a-z`{|}~])*@[a-zA-Z0-9](-*\.?[a-zA-Z0-9])*\.[a-zA-Z](-?[a-zA-Z0-9])+$/;
@@ -245,4 +282,10 @@ const StyledCloseIcon = styled.img`
 const SuccessWrapper = styled.div`
   text-align: center;
   color: black;
+`;
+
+const StyledRecaptcha = styled(ReCAPTCHA)`
+  margin: 2em;
+  display: flex;
+  justify-content: center;
 `;

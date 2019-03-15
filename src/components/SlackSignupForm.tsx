@@ -93,13 +93,12 @@ const SlackSignupForm: React.FC<Props> = ({ close }) => {
         .json();
       dispatch({ type: "SUBMITTED" });
     } catch (e) {
-      console.error(e);
-
       dispatch({
         type: "ERROR",
         payload: {
-          message:
-            "Well shit.  There was a server error when processing this form.",
+          message: `Well shit.  There was an error when processing this form. ${
+            e.message
+          }.`,
         },
       });
     }

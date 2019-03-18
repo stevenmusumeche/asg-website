@@ -33,14 +33,16 @@ const InlineSectionHeader = styled(SectionHeader)`
   }
 `;
 
-const Join: React.FC = () => (
+const Footer: React.FC = () => (
   <BlueSection>
     <Container>
       <FlexWrapper>
-        <InlineSectionHeader>Some Content Here</InlineSectionHeader>
+        <InlineSectionHeader>
+          Acadiana Software Group is housed in Lafayette, LA
+        </InlineSectionHeader>
       </FlexWrapper>
     </Container>
   </BlueSection>
 );
 
-export default Join;
+export default Footer;

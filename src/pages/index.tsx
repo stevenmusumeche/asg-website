@@ -5,7 +5,7 @@ import SEO from "../components/Seo";
 import Banner from "../sections/Banner";
 import About from "../sections/About";
 import PastEvents from "../sections/PastEvents";
-import Join from "../sections/Join";
+import Footer from "../sections/Footer";
 import MainStripe from "../components/MainStripe";
 import UpcomingTalk from "../sections/UpcomingEvents";
 import { GlobalStyle } from "../styles/typography";
@@ -31,9 +31,9 @@ const IndexPage: React.FC = () => {
         <Banner />
         <UpcomingTalk />
         <MainStripe />
-        <PastEvents />
         <About />
-        <Join />
+        <PastEvents />
+        <Footer />
       </Layout>
     </StateProvider>
   );

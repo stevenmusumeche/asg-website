@@ -5,6 +5,7 @@ import styled from "styled-components";
 import { SectionHeader } from "../styles/typography";
 import { Container } from "../styles/alignment";
 import colors from "../styles/colors";
+import Flag from "../images/flag.svg";
 
 const BlueSection = styled.section`
   position: relative;
@@ -17,29 +18,21 @@ const BlueSection = styled.section`
 
 const FlexWrapper = styled.div`
   display: flex;
-  flex-flow: column;
   justify-content: center;
   align-items: center;
-
-  @media screen and (min-width: 640px) {
-    flex-flow: row;
-  }
+  font-size: 1.3em;
 `;
 
-const InlineSectionHeader = styled(SectionHeader)`
-  @media screen and (min-width: 640px) {
-    margin-bottom: 0;
-    margin-right: 0.5em;
-  }
+const Img = styled.img`
+  margin: 0 1em 0 0;
 `;
 
 const Footer: React.FC = () => (
   <BlueSection>
     <Container>
       <FlexWrapper>
-        <InlineSectionHeader>
-          Acadiana Software Group is housed in Lafayette, LA
-        </InlineSectionHeader>
+        <Img src={Flag} style={{ width: 50 }} />
+        <div>Acadiana Software Group is housed in Lafayette, LA</div>
       </FlexWrapper>
     </Container>
   </BlueSection>

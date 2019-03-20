@@ -34,7 +34,21 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
-    `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        path: `${__dirname}/src/events`,
+        name: "markdown-pages",
+      },
+    },
+    `gatsby-transformer-remark`,
+    // `gatsby-transformer-sharp`,
+    {
+      resolve: `gatsby-plugin-favicon`,
+      options: {
+        logo: "./src/images/favicon.png",
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.app/offline
     // 'gatsby-plugin-offline',

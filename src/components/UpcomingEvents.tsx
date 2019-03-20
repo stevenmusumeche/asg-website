@@ -14,7 +14,7 @@ const List = styled.ul`
   margin: 0;
   list-style-type: none;
   ${FontSmooth}
-  
+
   @media screen and (min-width: 640px) {
     font-size: 1.2em;
   }
@@ -30,7 +30,7 @@ const ListItem = styled.li`
 
 const EventName = styled.h3`
   font-size: 1.5em;
-  margin-bottom: .25em;
+  margin-bottom: 0.25em;
 `;
 
 const EventDate = styled.div``;
@@ -50,7 +50,11 @@ const ExternalLinkIcon = styled.img`
 `;
 
 const UpcomingEvents: React.FC<Props> = ({ maxEvents }) => {
-  const events = useEvents();
+  const { events, hasError } = useEvents();
+
+  if (hasError) {
+    return <div>Error loading events.</div>;
+  }
 
   if (events.length === 0) {
     return <img src={LoaderImage} style={{ height: 70 }} />;

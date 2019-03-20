@@ -2,76 +2,36 @@ import React from "react";
 
 import { Container } from "../styles/alignment";
 import { SectionHeader, FontSmooth } from "../styles/typography";
-import { StaticQuery, graphql } from "gatsby";
 import styled from "styled-components";
+import { usePastEvents } from "../hooks/usePastEvents";
 
-interface EventEntry {
-  id: string;
-  frontmatter: {
-    date: string;
-    presenter: string;
-    slideUrl?: string;
-    talkTitle: string;
-  };
-  html: string;
-}
+const PastEvents: React.FC = () => {
+  const events = usePastEvents();
 
-interface QueryData {
-  allMarkdownRemark: { edges: Array<{ node: EventEntry }> };
-}
-
-const PastEvents: React.FC = () => (
-  <StaticQuery
-    query={graphql`
-      {
-        allMarkdownRemark(
-          sort: { fields: frontmatter___date, order: DESC }
-          limit: 12
-        ) {
-          edges {
-            node {
-              id
-              html
-              frontmatter {
-                talkTitle
-                date(formatString: "dddd, MMMM Do YYYY")
-                presenter
-                slideUrl
-              }
-            }
-          }
-        }
-      }
-    `}
-    // todo: move to component
-    render={(data: QueryData) => (
-      <StyledContainer>
-        <SectionHeader>Past Events</SectionHeader>
-        <List>
-          {data.allMarkdownRemark.edges.map(edge => (
-            <ListItem key={edge.node.id}>
-              <EventName>{edge.node.frontmatter.talkTitle}</EventName>
-              <div>
-                {edge.node.frontmatter.presenter}, {edge.node.frontmatter.date}{" "}
-                (
-                {edge.node.frontmatter.slideUrl && (
-                  <a href={edge.node.frontmatter.slideUrl} target="_blank">
-                    View Slides
-                  </a>
-                )}
-                )
-              </div>
-              <div />
-              <TalkDescription
-                dangerouslySetInnerHTML={{ __html: edge.node.html }}
-              />
-            </ListItem>
-          ))}
-        </List>
-      </StyledContainer>
-    )}
-  />
-);
+  return (
+    <StyledContainer>
+      <SectionHeader>Past Events</SectionHeader>
+      <List>
+        {events.map(event => (
+          <ListItem key={event.id}>
+            <EventName>{event.talkTitle}</EventName>
+            <div>
+              {event.presenter}, {event.date} (
+              {event.slideUrl && (
+                <a href={event.slideUrl} target="_blank">
+                  View Slides
+                </a>
+              )}
+              )
+            </div>
+            <div />
+            <TalkDescription dangerouslySetInnerHTML={{ __html: event.html }} />
+          </ListItem>
+        ))}
+      </List>
+    </StyledContainer>
+  );
+};
 
 export default PastEvents;
 

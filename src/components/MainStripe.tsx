@@ -19,7 +19,7 @@ const StripesContainer = styled.div`
   position: relative;
   height: calc(15vw + 52px);
   width: 100%;
-  margin-top: -7vw;
+  margin-top: -5.5vw;
   margin-bottom: 1em;
   z-index: 0;
 `;

@@ -120,7 +120,7 @@ const SlackSignupForm: React.FC<Props> = ({ close }) => {
       />
 
       <Form onSubmit={handleSubmit}>
-        <div>
+        <InputContainer>
           <EmailInput
             name="email"
             value={state.email}
@@ -129,7 +129,7 @@ const SlackSignupForm: React.FC<Props> = ({ close }) => {
             hasError={state.error !== ""}
           />
           {state.error && <ErrorMessage>{state.error}</ErrorMessage>}
-        </div>
+        </InputContainer>
         {!state.submitting ? (
           <Button
             type="submit"
@@ -186,22 +186,34 @@ const Form = styled.form`
   display: flex;
   align-items: flex-start;
   justify-content: center;
+  flex-flow: row wrap;
 `;
 
+const InputContainer = styled.div`
+  flex: 1;
+`
+
 const EmailInput = styled.input<{ hasError: boolean }>`
-  font-size: 1.2em;
+  width: 100%;
+  min-width: 250px;
   padding: 0 0.6em;
+  margin-bottom: 1em;
+  font-size: 1.2em;
+  line-height: 2.6;
   border: 1px solid;
   color: ${colors.grey};
   border-color: ${props => (props.hasError ? colors.red : colors.grey)};
-  width: 500px;
   vertical-align: bottom;
+  transform: translate(0, 3px);
+
   &:focus {
     border-color: ${colors.yellow};
     outline: none;
   }
-  transform: translate(0, 3px);
-  line-height: 2.6;
+
+  @media screen and (min-width: 505px) {
+    margin-bottom: 0;
+  }
 `;
 
 const Button = styled.button`

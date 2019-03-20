@@ -10,21 +10,6 @@ import MainStripe from "../components/MainStripe";
 import UpcomingTalk from "../sections/UpcomingEvents";
 import { GlobalStyle } from "../styles/typography";
 import StateProvider from "../components/StateProvider";
-import { graphql } from "gatsby";
-
-// interface EventEntry {
-//   frontmatter: {
-//     date: string;
-//     presenter: string;
-//     slideUrl?: string;
-//     talkTitle: string;
-//   };
-//   html: string;
-// }
-
-// interface Props {
-//   //data: { allMarkdownRemark: { edges: Array<{ node: EventEntry }> } };
-// }
 
 const IndexPage: React.FC = () => {
   return (
@@ -55,24 +40,3 @@ const IndexPage: React.FC = () => {
 };
 
 export default IndexPage;
-
-export const query = graphql`
-  {
-    allMarkdownRemark(
-      sort: { fields: frontmatter___date, order: DESC }
-      limit: 12
-    ) {
-      edges {
-        node {
-          html
-          frontmatter {
-            talkTitle
-            date(formatString: "MMMM Do, YYYY")
-            presenter
-            slideUrl
-          }
-        }
-      }
-    }
-  }
-`;

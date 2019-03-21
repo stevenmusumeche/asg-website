@@ -16,13 +16,12 @@ const PastEvents: React.FC = () => {
           <ListItem key={event.id}>
             <EventName>{event.talkTitle}</EventName>
             <div>
-              {event.presenter}, {event.date} (
+              {event.presenter}, {event.date}{" "}
               {event.slideUrl && (
                 <a href={event.slideUrl} target="_blank">
-                  View Slides
+                  (View Slides)
                 </a>
               )}
-              )
             </div>
             <div />
             <TalkDescription dangerouslySetInnerHTML={{ __html: event.html }} />

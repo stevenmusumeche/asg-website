@@ -5,7 +5,7 @@ export const usePastEvents = () => {
     {
       allMarkdownRemark(
         sort: { fields: frontmatter___date, order: DESC }
-        limit: 12
+        limit: 24
       ) {
         edges {
           node {

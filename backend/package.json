@@ -9,7 +9,6 @@
   "dependencies": {
     "axios": "^0.18.0",
     "html2plaintext": "^2.1.2",
-    "serverless": "^1.39.1",
     "serverless-dotenv-plugin": "^2.0.1"
   },
   "devDependencies": {

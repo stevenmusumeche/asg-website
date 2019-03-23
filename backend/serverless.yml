@@ -12,7 +12,6 @@ custom:
 
 provider:
   name: aws
-  profile: serverless
   runtime: nodejs8.10
   stage: dev
 

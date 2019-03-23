@@ -43,7 +43,7 @@
     "develop": "gatsby develop",
     "start": "npm run develop",
     "serve": "gatsby serve",
-    "deploy-backend": "cd backend && serverless deploy --stage=prod && cd ..",
+    "deploy-backend": "cd backend && serverless deploy --verbose --stage=prod",
     "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "repository": {

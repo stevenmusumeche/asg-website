@@ -4,7 +4,7 @@
   "description": "Serverless webpack example using Typescript",
   "main": "handler.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "deploy": "serverless deploy --key=$AWS_KEY --secret=$AWS_SECRET --verbose --stage=prod"
   },
   "dependencies": {
     "axios": "^0.18.0",

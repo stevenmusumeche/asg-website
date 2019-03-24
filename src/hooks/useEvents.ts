@@ -1,7 +1,10 @@
 import { useState, useEffect } from "react";
 
-export function useEvents(sort: SortDirection = "ASC"): ASGEvent[] {
+export function useEvents(
+  sort: SortDirection = "ASC"
+): { hasError: boolean; events: ASGEvent[] } {
   const [events, setEvents] = useState<ASGEvent[]>([]);
+  const [hasError, setHasError] = useState(false);
 
   useEffect(() => {
     fetch(
@@ -24,8 +27,9 @@ export function useEvents(sort: SortDirection = "ASC"): ASGEvent[] {
             );
           })
         );
-      });
+      })
+      .catch(e => setHasError(true));
   }, []);
 
-  return events;
+  return { events, hasError };
 }

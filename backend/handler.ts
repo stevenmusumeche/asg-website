@@ -52,6 +52,7 @@ export const joinSlack: APIGatewayProxyHandler = async event => {
     };
   }
 };
+
 function validateRequest(event: APIGatewayProxyEvent) {
   if (!event.body) throw new Error("invalid request");
   const request = JSON.parse(event.body);

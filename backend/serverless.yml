@@ -12,7 +12,7 @@ custom:
 
 provider:
   name: aws
-  profile: serverless
+  profile: netlify
   runtime: nodejs8.10
   stage: dev
 

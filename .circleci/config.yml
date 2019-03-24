@@ -61,9 +61,8 @@ jobs:
       - deploy:
           name: deploy to AWS
           command: |
-            pwd
             if [ "${CIRCLE_BRANCH}" = "master" ]; then
-              npm run deploy -- --stage prod 
+              cd backend && npm run deploy -- --stage prod 
             else
-              npm run deploy -- --stage dev 
+              cd backend && npm run deploy -- --stage dev 
             fi

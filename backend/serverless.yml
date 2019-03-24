@@ -10,15 +10,6 @@ provider:
   runtime: nodejs8.10
   stage: dev
   environment:
-    # environment variables are stored in AWS SSM
-    # they can be set like this (with a user with proper permissions):
-    # aws ssm put-parameter --profile netlify --name /asg/RECAPTCHA_SECRET_KEY --type String --value foobar
-    # GOOGLE_CALENDAR_API_KEY: ${ssm:/asg/GOOGLE_CALENDAR_API_KEY}
-    # GOOGLE_CALENDAR_ID: ${ssm:/asg/GOOGLE_CALENDAR_ID}
-    # MEETUP_API_KEY: ${ssm:/asg/MEETUP_API_KEY}
-    # SLACK_JOIN_REQUEST_URL: ${ssm:/asg/SLACK_JOIN_REQUEST_URL}
-    # RECAPTCHA_SECRET_KEY: ${ssm:/asg/RECAPTCHA_SECRET_KEY}
-
     # inject environment variables from CircleCI into serverless so they're available in node
     GOOGLE_CALENDAR_API_KEY: ${env:GOOGLE_CALENDAR_API_KEY}
     GOOGLE_CALENDAR_ID: ${env:GOOGLE_CALENDAR_ID}

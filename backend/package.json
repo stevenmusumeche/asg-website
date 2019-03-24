@@ -4,7 +4,7 @@
   "description": "Serverless webpack example using Typescript",
   "main": "handler.js",
   "scripts": {
-    "deploy": "serverless deploy"
+    "deploy": "serverless deploy --stage production --verbose"
   },
   "dependencies": {
     "axios": "^0.18.0",
@@ -24,3 +24,7 @@
   "author": "The serverless webpack authors (https://github.com/elastic-coders/serverless-webpack)",
   "license": "MIT"
 }
+
+
+
+serverless config credentials --provider aws --key $AWS_KEY --secret $AWS_SECRET --profile netlify

@@ -42,16 +42,14 @@ jobs:
               netlify deploy --dir=public
             fi
 
-      # Download and cache dependencies
-      - run: cd backend
-      - run: pwd
+      # Download and cache dependencies for backend
       - restore_cache:
           keys:
             - v1-dependencies-backend-{{ checksum "package.json" }}
             # fallback to using the latest cache if no exact match is found
             - v1-dependencies-backend
 
-      - run: npm install
+      - run: cd backend && npm install
 
       - run: sudo npm install serverless -g
 
@@ -60,10 +58,10 @@ jobs:
             - node_modules
           key: v1-dependencies-backend-{{ checksum "package.json" }}
 
+      # deploy to AWS
       - deploy:
           name: deploy to AWS
           command: |
-            pwd
             if [ "${CIRCLE_BRANCH}" = "master" ]; then
               cd backend && npm run deploy -- --stage prod 
             else

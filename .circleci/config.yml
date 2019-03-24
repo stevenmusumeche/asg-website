@@ -43,6 +43,8 @@ jobs:
             fi
 
       # Download and cache dependencies
+      - run: cd backend
+      - run: pwd
       - restore_cache:
           keys:
             - v1-dependencies-backend-{{ checksum "package.json" }}
@@ -61,6 +63,7 @@ jobs:
       - deploy:
           name: deploy to AWS
           command: |
+            pwd
             if [ "${CIRCLE_BRANCH}" = "master" ]; then
               cd backend && npm run deploy -- --stage prod 
             else

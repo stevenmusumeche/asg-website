@@ -34,10 +34,10 @@ jobs:
       # deploy to netlify
       - run: npm install netlify-cli -g
       - deploy:
-        name: deploy to netlify
-        command: |
-          if [ "${CIRCLE_BRANCH}" = "master" ]; then
-            netlify deploy --dir=public --prod
-          else
-            netlify deploy --dir=public
-          fi
+          name: deploy to netlify
+          command: |
+            if [ "${CIRCLE_BRANCH}" = "master" ]; then
+              netlify deploy --dir=public --prod
+            else
+              netlify deploy --dir=public
+            fi

@@ -11,6 +11,7 @@ custom:
 
 provider:
   name: aws
+  profile: netlify
   runtime: nodejs8.10
   stage: dev
   environment:

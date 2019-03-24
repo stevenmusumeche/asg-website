@@ -42,8 +42,7 @@
     "build-gatsby": "gatsby build",
     "develop": "gatsby develop",
     "start": "npm run develop",
-    "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
+    "serve": "gatsby serve"
   },
   "repository": {
     "type": "git",

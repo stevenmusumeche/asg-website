@@ -32,7 +32,7 @@ jobs:
       - run: npm run build-gatsby
 
       # deploy to netlify
-      - run: npm install netlify-cli -g
+      - run: sudo npm install netlify-cli -g
       - deploy:
           name: deploy to netlify
           command: |

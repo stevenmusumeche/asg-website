@@ -21,7 +21,7 @@ const Nav: React.FC = () => {
   return (
     <>
       <Wrapper>
-        <NavLink href={`#about`}>About&nbsp;ASG</NavLink>
+        <NavLink href={`#about`}>About&nbsp;ASGxxx</NavLink>
         <NavLink href={`#past-events`}>Past&nbsp;Events</NavLink>
         <NavLink
           onClick={e => {

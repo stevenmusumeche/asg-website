@@ -24,8 +24,8 @@ const Nav: React.FC = () => {
         <NavLink href={`#about`}>About&nbsp;ASG</NavLink>
         <NavLink href={`#past-events`}>Past&nbsp;Events</NavLink>
         <NavLink
-          onClick={e => {
-            e.preventDefault();
+          onClick={event => {
+            event.preventDefault();
             toggleSlackModal();
           }}
           href={`#`}

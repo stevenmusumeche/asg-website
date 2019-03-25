@@ -20,5 +20,5 @@ jobs:
             if [ "${CIRCLE_BRANCH}" = "master" ]; then
               cd backend && npm run deploy -- --stage prod 
             else
-              cd backend && npm run deploy -- --stage ${CIRCLE_SHA1} 
+              cd backend && npm run deploy -- --stage $(echo $CIRCLE_SHA1 | cut -c -7)
             fi

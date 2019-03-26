@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
@@ -10,8 +10,14 @@ import MainStripe from "../components/MainStripe";
 import UpcomingTalk from "../sections/UpcomingEvents";
 import { GlobalStyle } from "../styles/typography";
 import StateProvider from "../components/StateProvider";
+import ReactGA from "react-ga";
 
 const IndexPage: React.FC = () => {
+  useEffect(() => {
+    ReactGA.initialize("UA-137057022-1");
+    ReactGA.pageview(window.location.pathname + window.location.search);
+  }, []);
+
   return (
     <StateProvider>
       <Layout>

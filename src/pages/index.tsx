@@ -6,8 +6,8 @@ import Banner from "../sections/Banner";
 import About from "../sections/About";
 import PastEvents from "../sections/PastEvents";
 import Footer from "../sections/Footer";
-import MainStripe from "../components/MainStripe";
-import UpcomingTalk from "../sections/UpcomingEvents";
+import MainStripe from "../sections/MainStripe";
+import UpcomingEvents from "../sections/UpcomingEvents";
 import { GlobalStyle } from "../styles/typography";
 import StateProvider from "../components/StateProvider";
 import ReactGA from "react-ga";
@@ -35,7 +35,7 @@ const IndexPage: React.FC = () => {
         />
         <GlobalStyle />
         <Banner />
-        <UpcomingTalk />
+        <UpcomingEvents />
         <MainStripe />
         <About />
         <PastEvents />

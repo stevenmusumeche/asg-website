@@ -1,7 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 
-import UpcomingEvents from "../components/UpcomingEvents";
+import UpcomingEventsComp from "../components/UpcomingEvents";
 import { Container as AlignmentContainer } from "../styles/alignment";
 import colors from "../styles/colors";
 import { fonts, FontSmooth } from "../styles/typography";
@@ -21,7 +21,7 @@ const Container = styled(AlignmentContainer)`
 `;
 
 const Header = styled.h2`
-  margin-bottom: .75em;
+  margin-bottom: 0.75em;
   font-family: ${fonts.display};
   font-size: 1.1em;
   font-weight: 500;
@@ -30,13 +30,13 @@ const Header = styled.h2`
   ${FontSmooth}
 `;
 
-const UpcomingTalk: React.FC = () => (
+const UpcomingEvents: React.FC = () => (
   <Section>
     <Container>
       <Header>Upcoming Events:</Header>
-      <UpcomingEvents maxEvents={2} />
+      <UpcomingEventsComp maxEvents={2} />
     </Container>
   </Section>
 );
 
-export default UpcomingTalk;
+export default UpcomingEvents;

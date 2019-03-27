@@ -1,9 +1,8 @@
 {
-  "name": "gatsby-starter-default",
+  "name": "asg-website",
   "private": true,
-  "description": "A simple starter to get up and developing quickly with Gatsby",
-  "version": "0.1.0",
-  "author": "Kyle Mathews <mathews.kyle@gmail.com>",
+  "description": "Website for Acadiana Software Group",
+  "version": "1.0.0",
   "dependencies": {
     "@types/react-google-recaptcha": "^1.0.0",
     "babel-plugin-styled-components": "^1.10.0",
@@ -47,10 +46,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
-  },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/stevenmusumeche/asg-website"
   },
   "devDependencies": {
     "@types/react-helmet": "^5.0.8",

@@ -29,8 +29,8 @@ const eventSources: ASGEventSource[] = [
   },
   {
     name: "Acadiana Data Analytics",
-    fetcher: fetchFromGoogleCalendar("YWNhZGlhbmFkYXRhQGdtYWlsLmNvbQ", process
-      .env.GOOGLE_CALENDAR_API_KEY as string),
+    fetcher: fetchFromGoogleCalendar("acadianadata@gmail.com", process.env
+      .GOOGLE_CALENDAR_API_KEY as string),
   },
 ];
 

@@ -27,6 +27,11 @@ const eventSources: ASGEventSource[] = [
     name: "AWS Lafayette",
     fetcher: fetchFromMeetup("AWS-Lafayette"),
   },
+  {
+    name: "Acadiana Data Analytics",
+    fetcher: fetchFromGoogleCalendar("acadianadata@gmail.com", process.env
+      .GOOGLE_CALENDAR_API_KEY as string),
+  },
 ];
 
 /**

@@ -34,7 +34,7 @@ const UpcomingEvents: React.FC = () => (
   <Section>
     <Container>
       <Header>Upcoming Events:</Header>
-      <UpcomingEventsComp maxEvents={2} />
+      <UpcomingEventsComp maxEvents={4} />
     </Container>
   </Section>
 );

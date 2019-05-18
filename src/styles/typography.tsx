@@ -10,6 +10,10 @@ import colors from "./colors";
 import GatsbyLink from "gatsby-link";
 
 export const GlobalStyle = createGlobalStyle`
+  html {
+    scroll-behavior: smooth
+  }
+  
   @font-face {
     font-family: system;
     font-style: normal;

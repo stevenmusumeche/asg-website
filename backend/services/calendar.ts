@@ -23,10 +23,10 @@ const eventSources: ASGEventSource[] = [
       process.env.GOOGLE_CALENDAR_API_KEY as string
     ),
   },
-  {
-    name: "AWS Lafayette",
-    fetcher: fetchFromMeetup("AWS-Lafayette"),
-  },
+  // {
+  //   name: "AWS Lafayette",
+  //   fetcher: fetchFromMeetup("AWS-Lafayette"),
+  // },
   {
     name: "Acadiana Data Analytics",
     fetcher: fetchFromGoogleCalendar("acadianadata@gmail.com", process.env
@@ -71,9 +71,7 @@ export async function listEvents(): Promise<ASGEvent[]> {
 
 function fetchFromMeetup(meetupUrlName: string) {
   return async function fetcher(source: string) {
-    const url = `https://api.meetup.com/${meetupUrlName}/events?photo-host=public&page=200&key=${
-      process.env.MEETUP_API_KEY
-    }`;
+    const url = `https://api.meetup.com/${meetupUrlName}/events?photo-host=public&page=200&key=${process.env.MEETUP_API_KEY}`;
     const { data }: { data: MeetupEvent[] } = await axios.get(url);
 
     return data.map(mapMeetupToEvent).map(event => ({ ...event, source }));

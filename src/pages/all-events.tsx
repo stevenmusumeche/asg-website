@@ -3,15 +3,14 @@ import React, { useEffect } from "react";
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
 import Banner from "../sections/Banner";
-import About from "../sections/About";
 import PastEvents from "../sections/PastEvents";
 import Footer from "../sections/Footer";
 import MainStripe from "../sections/MainStripe";
-import UpcomingEvents from "../sections/UpcomingEvents";
-import { GlobalStyle } from "../styles/typography";
+import { GlobalStyle, textStriper } from "../styles/typography";
+import colors from "../styles/colors";
 import StateProvider from "../components/StateProvider";
 import ReactGA from "react-ga";
-import Header from "../components/Header";
+import styled from "styled-components";
 
 const IndexPage: React.FC = () => {
   useEffect(() => {
@@ -36,14 +35,32 @@ const IndexPage: React.FC = () => {
         />
         <GlobalStyle />
         <Banner />
-        <UpcomingEvents />
         <MainStripe />
-        <About />
-        <PastEvents maxEvents={3}/>
+        <PastEvents />
         <Footer />
+        <GoBack href="#">{"Top"}</GoBack>
       </Layout>
     </StateProvider>
   );
 };
 
 export default IndexPage;
+
+const GoBack = styled.a`
+  position: fixed;
+  z-index: 1;
+  color: ${colors.white};
+  background-color: ${colors.blue};
+  bottom: 0;
+  left: 0;
+  display: block;
+  padding: 1em;
+  text-shadow: ${textStriper({
+    colorArray: [colors.red],
+    step: 0.1,
+  })};
+  text-transform: uppercase;
+  font-weight: 700;
+  text-decoration: none;
+  font-size: 1.25em;
+`;

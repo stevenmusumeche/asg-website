@@ -12,7 +12,7 @@ const BannerText = styled.h1`
   font-family: ${fonts.display};
   letter-spacing: 0.05em;
   margin-bottom: 0;
-  padding: .5em;
+  padding: 2.5vw 0 6vw;
   text-align: center;
   text-shadow: ${textStriper({
     colorArray: [colors.yellow, colors.red],
@@ -26,12 +26,20 @@ const BannerText = styled.h1`
   }
 `;
 
+const HomeLink = styled.a`
+  text-decoration: none;
+  cursor: pointer;
+  padding: 0;
+`;
+
 const Banner: React.FC = () => (
-  <BannerText>
-    Acadiana
-    <br />
-    Software Group
-  </BannerText>
+  <HomeLink href="/">
+    <BannerText>
+      Acadiana
+      <br />
+      Software Group
+    </BannerText>
+  </HomeLink>
 );
 
 export default Banner;

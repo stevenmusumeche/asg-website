@@ -1,4 +1,4 @@
-import React, { useState, useContext, useEffect } from "react";
+import React, { useEffect } from "react";
 
 import Layout from "../components/Layout";
 import SEO from "../components/Seo";
@@ -11,6 +11,7 @@ import UpcomingEvents from "../sections/UpcomingEvents";
 import { GlobalStyle } from "../styles/typography";
 import StateProvider from "../components/StateProvider";
 import ReactGA from "react-ga";
+import Header from "../components/Header";
 
 const IndexPage: React.FC = () => {
   useEffect(() => {
@@ -38,7 +39,7 @@ const IndexPage: React.FC = () => {
         <UpcomingEvents />
         <MainStripe />
         <About />
-        <PastEvents />
+        <PastEvents maxEvents={3}/>
         <Footer />
       </Layout>
     </StateProvider>

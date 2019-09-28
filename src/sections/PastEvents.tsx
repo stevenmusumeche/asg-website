@@ -5,14 +5,19 @@ import { SectionHeader, FontSmooth } from "../styles/typography";
 import styled from "styled-components";
 import { usePastEvents } from "../hooks/usePastEvents";
 
-const PastEvents: React.FC = () => {
+interface PastEventsProps {
+  maxEvents?: number;
+}
+
+const PastEvents: React.FC<PastEventsProps> = ({ maxEvents }) => {
   const events = usePastEvents();
+  const limitedEvents = maxEvents ? events.splice(0, maxEvents) : events;
 
   return (
     <StyledContainer>
       <SectionHeader>Past Events</SectionHeader>
       <List>
-        {events.map(event => (
+        {limitedEvents.map(event => (
           <ListItem key={event.id}>
             <EventName>{event.talkTitle}</EventName>
             <div>
@@ -28,6 +33,9 @@ const PastEvents: React.FC = () => {
           </ListItem>
         ))}
       </List>
+      {maxEvents ? (
+        <SeeAllLink href={`all-events`}>See All Past Events</SeeAllLink>
+      ) : null}
     </StyledContainer>
   );
 };
@@ -59,4 +67,11 @@ const TalkDescription = styled.div`
 
 const StyledContainer = styled(Container)`
   padding-top: 0;
+`;
+
+const SeeAllLink = styled.a`
+  display: block;
+  padding: 2em 0;
+  text-align: right;
+  cursor: pointer;
 `;

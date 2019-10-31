@@ -7,7 +7,7 @@
     "deploy": "serverless deploy --verbose"
   },
   "dependencies": {
-    "axios": "^0.18.0",
+    "axios": "^0.18.1",
     "html2plaintext": "^2.1.2"
   },
   "devDependencies": {

@@ -23,6 +23,7 @@ const Container = styled(AlignmentContainer)`
 const Header = styled.h2`
   margin-bottom: 0.75em;
   font-family: ${fonts.display};
+  color: ${colors.white};
   font-size: 1.1em;
   font-weight: 500;
   letter-spacing: 0.05em;

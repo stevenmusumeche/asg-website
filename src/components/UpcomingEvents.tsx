@@ -5,6 +5,7 @@ import styled from "styled-components";
 import ExternalLinkImage from "../images/external-link.svg";
 import LoaderImage from "../images/loader.svg";
 import { FontSmooth } from "../styles/typography";
+import colors from "../styles/colors";
 
 interface Props {
   maxEvents?: number;
@@ -31,6 +32,7 @@ const ListItem = styled.li`
 const EventName = styled.h3`
   font-size: 1.5em;
   margin-bottom: 0.25em;
+  color: ${colors.white};
 `;
 
 const EventDate = styled.div``;

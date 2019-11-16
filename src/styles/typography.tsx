@@ -51,7 +51,7 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   a {
-    color: #000;
+    color: ${colors.blue};
     text-decoration: underline;
     &:hover {
       text-decoration: none;
@@ -72,8 +72,9 @@ export const fonts = {
 const config: TypographyOptions = {
   headerFontFamily: [fonts.default, fonts.fallback, "sans-serif"],
   headerWeight: "700",
+  headerColor: colors.blue,
   bodyFontFamily: [fonts.default, fonts.fallback, "sans-serif"],
-  bodyColor: colors.blue,
+  bodyColor: colors.black,
   baseFontSize: "18px",
 };
 const typography = new Typography(config);

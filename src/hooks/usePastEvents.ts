@@ -16,6 +16,7 @@ export const usePastEvents = () => {
               date(formatString: "dddd, MMMM Do, YYYY")
               presenter
               slideUrl
+              videoUrl
             }
           }
         }
@@ -28,6 +29,7 @@ export const usePastEvents = () => {
     presenter: edge.node.frontmatter.presenter,
     date: edge.node.frontmatter.date,
     slideUrl: edge.node.frontmatter.slideUrl,
+    videoUrl: edge.node.frontmatter.videoUrl,
     talkTitle: edge.node.frontmatter.talkTitle,
     html: edge.node.html,
   }));
@@ -40,6 +42,7 @@ interface EventEntry {
     presenter: string;
     slideUrl?: string;
     talkTitle: string;
+    videoUrl?: string;
   };
   html: string;
 }

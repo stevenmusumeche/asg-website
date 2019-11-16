@@ -22,11 +22,21 @@ const PastEvents: React.FC<PastEventsProps> = ({ maxEvents }) => {
             <EventName>{event.talkTitle}</EventName>
             <div>
               {event.presenter}, {event.date}{" "}
+              {(event.slideUrl || event.videoUrl) && " ("}
               {event.slideUrl && (
                 <a href={event.slideUrl} target="_blank">
-                  (View Slides)
+                  View Slides
                 </a>
               )}
+              {event.videoUrl && (
+                <>
+                  <span>,&nbsp;</span>
+                  <a href={event.videoUrl} target="_blank">
+                    View Video
+                  </a>
+                </>
+              )}
+              {(event.slideUrl || event.videoUrl) && ")"}
             </div>
             <div />
             <TalkDescription dangerouslySetInnerHTML={{ __html: event.html }} />

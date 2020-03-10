@@ -52,14 +52,18 @@ const ExternalLinkIcon = styled.img`
 `;
 
 const UpcomingEvents: React.FC<Props> = ({ maxEvents }) => {
-  const { events, hasError } = useEvents();
+  const { events, hasError, fetching } = useEvents();
 
   if (hasError) {
     return <div>Error loading events.</div>;
   }
 
-  if (events.length === 0) {
+  if (fetching) {
     return <img src={LoaderImage} style={{ height: 70 }} />;
+  }
+
+  if (events.length === 0) {
+    return <List><ListItem><EventName>Check back soon!</EventName></ListItem></List>;
   }
 
   // only show upcoming events by hiding stuff older than 24 hours ago

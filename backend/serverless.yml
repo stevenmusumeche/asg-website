@@ -7,7 +7,7 @@ plugins:
 
 provider:
   name: aws
-  runtime: nodejs10.x
+  runtime: nodejs16.x
   stage: dev
   environment:
     # inject environment variables from CircleCI into serverless so they're available in node

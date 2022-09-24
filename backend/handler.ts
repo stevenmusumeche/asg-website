@@ -16,7 +16,7 @@ export const upcomingEvents: APIGatewayProxyHandler = async () => {
       headers: corsHeaders,
       body: JSON.stringify({ events }),
     };
-  } catch (e) {
+  } catch (e: any) {
     return {
       statusCode: (e && e.response.status) || 500,
       headers: corsHeaders,
@@ -44,7 +44,7 @@ export const joinSlack: APIGatewayProxyHandler = async event => {
       headers: corsHeaders,
       body: JSON.stringify(""),
     };
-  } catch (e) {
+  } catch (e: any) {
     return {
       statusCode: (e && e.response.status) || 400,
       headers: corsHeaders,

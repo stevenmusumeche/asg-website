@@ -15,7 +15,7 @@ const Section = styled.section`
   }
 `;
 
-const Container = styled(AlignmentContainer)`
+const Container = styled(AlignmentContainer as any)`
   position: relative;
   z-index: 1;
 `;

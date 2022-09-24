@@ -111,7 +111,7 @@ function fetchFromGoogleCalendar(
       return result.data.items
         .map(mapGoogleToEvent)
         .map(event => ({ ...event, source }));
-    } catch (e) {
+    } catch (e: any) {
       console.error(e.response);
       return [];
     }

@@ -12,7 +12,7 @@ const StyledHeader = styled.header`
 /**
  * Sets max width, centering, and alignment for header. Extends Container
  */
-const HeaderContainer = styled(Container)`
+const HeaderContainer = styled(Container as any)`
   text-align: center;
 `;
 

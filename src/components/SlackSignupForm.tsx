@@ -92,7 +92,7 @@ const SlackSignupForm: React.FC<Props> = ({ close }) => {
         })
         .json();
       dispatch({ type: "SUBMITTED" });
-    } catch (e) {
+    } catch (e: any) {
       dispatch({
         type: "ERROR",
         payload: {

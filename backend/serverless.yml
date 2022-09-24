@@ -1,5 +1,6 @@
-service:
-  name: backend
+service: backend
+
+frameworkVersion: ^3.22.0
 
 plugins:
   - serverless-webpack
@@ -11,11 +12,11 @@ provider:
   stage: dev
   environment:
     # inject environment variables from CircleCI into serverless so they're available in node
-    GOOGLE_CALENDAR_API_KEY: ${env:GOOGLE_CALENDAR_API_KEY}
-    GOOGLE_CALENDAR_ID: ${env:GOOGLE_CALENDAR_ID}
-    MEETUP_API_KEY: ${env:MEETUP_API_KEY}
-    SLACK_JOIN_REQUEST_URL: ${env:SLACK_JOIN_REQUEST_URL}
-    RECAPTCHA_SECRET_KEY: ${env:RECAPTCHA_SECRET_KEY}
+    GOOGLE_CALENDAR_API_KEY: ${env:GOOGLE_CALENDAR_API_KEY, 'xxx'}
+    GOOGLE_CALENDAR_ID: ${env:GOOGLE_CALENDAR_ID, 'xxx'}
+    MEETUP_API_KEY: ${env:MEETUP_API_KEY, 'xxx'}
+    SLACK_JOIN_REQUEST_URL: ${env:SLACK_JOIN_REQUEST_URL, 'xxx'}
+    RECAPTCHA_SECRET_KEY: ${env:RECAPTCHA_SECRET_KEY, 'xxx'}
 
 functions:
   upcomingEvents:

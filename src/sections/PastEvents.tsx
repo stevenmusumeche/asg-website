@@ -75,7 +75,7 @@ const TalkDescription = styled.div`
   margin-top: 1em;
 `;
 
-const StyledContainer = styled(Container)`
+const StyledContainer = styled(Container as any)`
   padding-top: 0;
 `;
 

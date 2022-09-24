@@ -19,7 +19,7 @@ jobs:
       - run:
           command: yarn run build-gatsby
           name: Build app
-      - run: sudo yarn install serverless -g
+      - run: sudo yarn global add serverless
       # deploy to AWS
       - deploy:
           name: deploy to AWS

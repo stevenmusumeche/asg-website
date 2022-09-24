@@ -23,13 +23,14 @@ const eventSources: ASGEventSource[] = [
       process.env.GOOGLE_CALENDAR_API_KEY as string
     ),
   },
-  // {
-  //   name: "AWS Lafayette",
-  //   fetcher: fetchFromMeetup("AWS-Lafayette"),
-  // },
   {
     name: "Acadiana Data Analytics",
     fetcher: fetchFromGoogleCalendar("acadianadata@gmail.com", process.env
+      .GOOGLE_CALENDAR_API_KEY as string),
+  },
+  {
+    name: "AWS Lafayette",
+    fetcher: fetchFromGoogleCalendar("meetup@infascination.com", process.env
       .GOOGLE_CALENDAR_API_KEY as string),
   },
 ];
@@ -39,8 +40,8 @@ const eventSources: ASGEventSource[] = [
  */
 export async function listEvents(): Promise<ASGEvent[]> {
   // check cache and return data from it if it's fresh
-  const fifteenMinsAgo = subMinutes(new Date(), 15);
-  if (cache.createdAt && isAfter(cache.createdAt, fifteenMinsAgo)) {
+  const fiveMinsAgo = subMinutes(new Date(), 5);
+  if (cache.createdAt && isAfter(cache.createdAt, fiveMinsAgo)) {
     console.log("Upcoming events cache hit");
     return cache.data;
   }

@@ -1,4 +1,4 @@
-import React, { value useState } from "react";
+import React, { useState } from "react";
 
 interface StateContext {
   showSlackModal: boolean;

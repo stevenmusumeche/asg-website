@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { value useState } from "react";
 
 interface StateContext {
   showSlackModal: boolean;
@@ -7,7 +7,7 @@ interface StateContext {
 
 export const StateContext = React.createContext(({} as any) as StateContext);
 
-const StateProvider: React.FC = ({ children }) => {
+const StateProvider: React.FC<{ children: JSX.Element }> = ({ children }) => {
   const [showSlackModal, setShowSlackModal] = useState(false);
 
   return (

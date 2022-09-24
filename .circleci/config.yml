@@ -6,7 +6,7 @@ version: 2
 jobs:
   build:
     docker:
-      - image: circleci/node:10.13.0
+      - image: cimg/node:18.9.0
     working_directory: ~/repo
     steps:
       - checkout

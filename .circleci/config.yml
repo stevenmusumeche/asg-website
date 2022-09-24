@@ -19,13 +19,13 @@ jobs:
       - run:
           command: yarn run build-gatsby
           name: Build app
-      - run: sudo yarn global add serverless
+      - run: sudo yarn global add serverless@1.60.4
       # deploy to AWS
       - deploy:
           name: deploy to AWS
           command: |
             if [ "${CIRCLE_BRANCH}" = "master" ]; then
-              cd backend && yarn run deploy -- --stage prod 
+              cd backend && yarn run deploy --stage prod 
             else
-              cd backend && yarn run deploy -- --stage $(echo $CIRCLE_SHA1 | cut -c -7)
+              cd backend && yarn run deploy --stage $(echo $CIRCLE_SHA1 | cut -c -7)
             fi

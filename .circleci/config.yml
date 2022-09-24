@@ -17,7 +17,7 @@ jobs:
           pkg-manager: yarn
           app-dir: "backend"
       - run:
-          command: yarn run build
+          command: yarn run build-gatsby
           name: Build app
       - run: sudo yarn install serverless -g
       # deploy to AWS

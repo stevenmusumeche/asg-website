@@ -19,14 +19,14 @@ provider:
     RECAPTCHA_SECRET_KEY: ${env:RECAPTCHA_SECRET_KEY, 'xxx'}
 
 functions:
-  upcomingEvents:
+  upcomingEvents2:
     handler: handler.upcomingEvents
     events:
       - http:
           path: events/upcoming
           method: get
           cors: true
-  joinSlack:
+  joinSlack2:
     handler: handler.joinSlack
     events:
       - http:

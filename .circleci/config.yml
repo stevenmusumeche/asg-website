@@ -2,17 +2,23 @@
 #
 # Check https://circleci.com/docs/2.0/language-javascript/ for more details
 #
-version: 2
+version: 2.1
+orbs:
+  node: circleci/node@5.0.2
+
 jobs:
   build:
-    docker:
-      - image: cimg/node:18.9.0
-    working_directory: ~/repo
+    executor: node/default
     steps:
       - checkout
-      - run: npm -v
-      - run: npm install
-      - run: cd backend && npm install
+      - node/install-packages:
+          pkg-manager: npm
+      - node/install-packages:
+          pkg-manager: npm
+          app-dir: "~/backend"
+      - run:
+          command: npm run build
+          name: Build app
       - run: sudo npm install serverless -g
       # deploy to AWS
       - deploy:

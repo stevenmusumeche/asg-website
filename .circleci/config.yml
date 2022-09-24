@@ -15,7 +15,7 @@ jobs:
           pkg-manager: yarn
       - node/install-packages:
           pkg-manager: yarn
-          app-dir: "~/backend"
+          app-dir: "backend"
       - run:
           command: yarn run build
           name: Build app

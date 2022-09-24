@@ -6,13 +6,10 @@ version: 2
 jobs:
   build:
     docker:
-      - image: cimg/node:16.15.0
+      - image: cimg/node:12.16
     working_directory: ~/repo
     steps:
       - checkout
-      - run:
-          name: Update NPM
-          command: "sudo npm install -g npm"
       - run: npm install
       - run: cd backend && npm install
       - run: sudo npm install serverless -g

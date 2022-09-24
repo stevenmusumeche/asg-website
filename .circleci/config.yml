@@ -20,6 +20,9 @@ jobs:
           command: yarn run build-gatsby
           name: Build app
       - run: sudo yarn global add serverless@3.22.0
+      - run: # print the name of the branch we're on
+          name: "What branch am I on?"
+          command: echo ${CIRCLE_BRANCH}
       # deploy to AWS
       - deploy:
           name: deploy to AWS

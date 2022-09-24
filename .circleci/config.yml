@@ -12,20 +12,20 @@ jobs:
     steps:
       - checkout
       - node/install-packages:
-          pkg-manager: npm
+          pkg-manager: yarn
       - node/install-packages:
-          pkg-manager: npm
+          pkg-manager: yarn
           app-dir: "~/backend"
       - run:
-          command: npm run build
+          command: yarn run build
           name: Build app
-      - run: sudo npm install serverless -g
+      - run: sudo yarn install serverless -g
       # deploy to AWS
       - deploy:
           name: deploy to AWS
           command: |
             if [ "${CIRCLE_BRANCH}" = "master" ]; then
-              cd backend && npm run deploy -- --stage prod 
+              cd backend && yarn run deploy -- --stage prod 
             else
-              cd backend && npm run deploy -- --stage $(echo $CIRCLE_SHA1 | cut -c -7)
+              cd backend && yarn run deploy -- --stage $(echo $CIRCLE_SHA1 | cut -c -7)
             fi
